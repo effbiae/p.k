@@ -7,18 +7,18 @@ C:@[;;:;]/[-1+&256;0+C;!#C]@0+
 
 t:2_"\n"\"
  _)+a0q`-:e/n\\
-__)+a0q`-+a/;t
+__)+a0q`-+a/_t
 ;_)+a0q`-+a';'
 )_)+a0q`++a';'
-+_)+a0q`-ta';'
++_)+a0q`-:a';'
 '_)+a0q`-:a';'
 a_)+bbq`++b';'
 0_)+11q`+:e';'
 qrrrrrtrrrrrrs
 `_)+b0q`++b';'
 -_)+a1q`-:a';'
-/ccccccccccc;c
-cccccccccccc;c
+/ccccccccccc_c
+cccccccccccc_c
 :_)+a0q`-+a';'
 b_)+bbq`++b';'
 1_)+11q`++e';'
