@@ -1,0 +1,69 @@
+S:" \t"                     /space
+I:"({[;)}]"                 /singles
+V:"+-*%&|<>=^!~,#_$?@.'/\\" /verb
+
+C:(S;I;V;".",a:_,/"aA"+\:!26;d:"0123456789"),"\"`-:e/\n\\"
+C:@[;;:;]/[-1+&256;0+C;!#C]@0+
+
+t:2_"\n"\"
+ _)+a0q`-:e/n\\
+__)+a0q`-+a/;t
+;_)+a0q`-+a';'
+)_)+a0q`++a';'
++_)+a0q`-ta';'
+'_)+a0q`-:a';'
+a_)+bbq`++b';'
+0_)+11q`+:e';'
+qrrrrrtrrrrrrs
+`_)+b0q`++b';'
+-_)+a1q`-:a';'
+/ccccccccccc;c
+cccccccccccc;c
+:_)+a0q`-+a';'
+b_)+bbq`++b';'
+1_)+11q`++e';'
+e_)+11q`1+1';'
+rrrrrrtrrrrrrs
+srrrrrrrrrrrrr
+t_)+a0q`++a';'"
+
+T:t[;0]?/:1_'t
+w:{p:-1_0,+\#'t:(&11>0{T[x;y]}\C x)_s::x;;(t;p)@\:&{~((1<#x)&"/"~*x)||/" \t"=\:*x}'t} /tokens and source positions
+e:{`0:s,"\n",(x#" "),"^";`err@y}                                             /error -- position caret under source
+f:+(("`"~*:;`s$1_);("\""~*:;::);(|/~^a?;,`s$);(|/~^d?;`I$);(|/~^V?;{`p"(",x,")"});(1=#:;*:))
+V:(+{[t;p]$[|/m:f[0]@\:t;$[|/*^i:f[1;*&m]t;e[p;"tok"];(i;p)];(t;p)]}').                         /Value from string
+
+j:{(x;y):(&~=':z=@'x)_/:(x;y);w:&z=@'*'x;,/'{@[x;z;:;y@x z]}[;;w]'[(x;y);({$[1<#x;,x;x]}';*:')]}    /join literals
+k:{x{j . x,y}/`i`s}
+w:k V w@
+
+s:"-1 2 -'a;`a 12 `ab`c \"cd\" {(+/|:)x} /c"
+`0:"\"",s,"\" tokenized with list literals and source positions"
+w s
+
+/E:E;e|e e:nve|te| t:n|v v:tA|V n:t[E]|(E)|{E}|N  from the original by atw (see parserclub)
+c:{$[~^`u`v?@x;"v";`w=@x;"a";|/";)]} "~\:x;";";" "]}
+n:{-1+i+:1};q:{";"=c s i}
+E:{|/";{[("~\:s n`}{e t`}\
+l:{$["["~s 1+j:i;[n`;j,,/|(E e t`;,E i)];E x]}                                                      /lambda {[a]a}
+t:{$[q`;1+#s;{("["~s i)|"a"=c s i}{$["["~s i;E x;(n`;x)]}/$["{"~s i;l i;~|/"(["~\:s i;n`;3>#x:E i;x 1;x]]}
+v:{("v"~c s x)|("a"~c s@*x)|(*x)~#s}                                                                        /verb?
+g:{$[v@*|x;(#s;{$[2=#x;x,1+#s;*x]}@-1_x;*|x);x]}                                      /if last is train make train
+e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(x;e f)]}
+P:{i::0;t s::x 0};r:{$[`C=@x;$["\""=x 0;. x;x];$[`A=@x;o'x;x]]}                    /rewrite strings as their value
+p:{r(x[0],(';::))P x:("[",0N),'w x}
+p"{+x}[0]"
+p"{x}"
+p"{[x;y]x}"
+p"{[a;b]a;b;c}"
+p"{[x;y]+/x}"
+p"{[x;y]+/x;y}"
+p"{[x;y]+}"
+p"{3+}"
+p"{[x]x+y-x}"
+p"{[x]+-}"
+""
+/p""   this segfaults: trace it back to w "" -- prototypes?  known problem "{[x]+-}"
+
+p'("x;y";"(x;y)";"f[x;y]";"x+y";"x+*y";"1+3*x";"(+x)%y";"(+/x)%#x";"x+m[*i]/y";"1+3+-:";"9(+\\|:)\\1 1")
+p@,")"
