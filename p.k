@@ -36,11 +36,11 @@ V:(+{[t;p]$[|/m:f[0]@\:t;$[|/*^i:f[1;*&m]t;e[p;"tok"];(i;p)];(t;p)]}').         
 j:{(x;y):(&~=':z=@'x)_/:(x;y);w:&z=@'*'x;,/'{@[x;z;:;y@x z]}[;;w]'[(x;y);({$[1<#x;,x;x]}';*:')]}    /join literals
 k:{x{j . x,y}/`i`s}
 w:k V w@
-
+/
 s:"-1 2 -'a;`a 12 `ab`c \"cd\" {(+/|:)x} /c"
 `0:"\"",s,"\" tokenized with list literals and source positions"
 w s
-
+\
 /E:E;e|e e:nve|te| t:n|v v:tA|V n:t[E]|(E)|{E}|N  from the original by atw (see parserclub)
 c:{$[~^`u`v?@x;"v";`w=@x;"a";|/";)]} "~\:x;";";" "]}
 n:{-1+i+:1};q:{";"=c s i}
@@ -50,8 +50,9 @@ t:{$[q`;1+#s;{("["~s i)|"a"=c s i}{$["["~s i;E x;(n`;x)]}/$["{"~s i;l i;~|/"(["~
 v:{("v"~c s x)|("a"~c s@*x)|(*x)~#s}                                                                        /verb?
 g:{$[v@*|x;(#s;{$[2=#x;x,1+#s;*x]}@-1_x;*|x);x]}                                      /if last is train make train
 e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(x;e f)]}
-P:{i::0;t s::x 0};r:{$[`C=@x;$["\""=x 0;. x;x];$[`A=@x;o'x;x]]}                    /rewrite strings as their value
-p:{r(x[0],(';::))P x:("[",0N),'w x}
+P:{i::0;t s::x 0}
+p:{(x[0],(';::))P x:("[",0N),'w x}
+/
 p"{+x}[0]"
 p"{x}"
 p"{[x;y]x}"
