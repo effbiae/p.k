@@ -55,7 +55,7 @@ g:{$[v@*|x;(#s;{$[2=#x;x,1+#s;*x]}@-1_x;*|x);x]}                                
 e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(x;e f)]}
 P:{i::0;t s::x 0}
 p:{(x[0],(';::))P x:("[",0N),'$[`C=@x;w x;x]}                                              /parse tokens or string
-pf:{p'+1_'/:(&("\n"~)'t)_/:(t;pos):("\n";0N),'w x}                             /parse file - return list of parses
+pf:{p'{(""~*:)'x}_ \+1_'/:(&("\n"~)'t)_/:(t;pos):("\n";0N),'w x}               /parse file - return list of parses
 /
 p"{+x}[0]"
 p"{x}"

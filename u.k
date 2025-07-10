@@ -24,7 +24,7 @@ $["#"~**s:0:`argv[2];s:1_s;s]
 /u p.p \"\n"/s
 p.w"/c\n/c\n1 /c\n 2\n"
 p.pf"1,2"
-p.pf"1,2\n3,4"
+p.pf"1,2\n3,4\n"
 /
 p.s:s
 \d p
