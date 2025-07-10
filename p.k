@@ -28,23 +28,26 @@ srrrrrrrrrrrrr
 t_)+a0q`++a';'"
 
 T:t[;0]?/:1_'t
-w:{p:-1_0,+\#'t:(&11>0{T[x;y]}\C x)_s::x;;(t;p)@\:&{~((1<#x)&"/"~*x)||/" \t"=\:*x}'t} /tokens and source positions
+w:{p:-1_0,+\#'t:(&11>0{T[x;y]}\C x)_s::x;(t;p)} /tokens and source positions
+semi:{w:&{(y~,"\n")&|/" \t"~\:*x}':x 0;(@[ \x[0];w-1;:;(#w)#,,";"];x 1)} /"\n " -> "; "
+strip:{x@\:&{~((1<#x)&"/"~*x)||/" \t"=\:*x}'x[0]}
+
 err:{`0:s,"\n",(x#" "),"^";`err@y}                                             /error -- position caret under source
 f:+(("`"~*:;`s$1_);("\""~*:;::);({(|/~^V?x)|~^x?":"};{`p"(",x,")"});(|/~^a?;,`s$);(|/~^d?;`I$);(1=#:;*:))
 h:(+{[t;p]$[|/m:f[0]@\:t;$[|/*^i:f[1;*&m]t;err[p;"tok"];(i;p)];(t;p)]}').                         /value from string
 
 j:{(x;y):(&~=':z=@'x)_/:(x;y);w:&z=@'*'x;,/'{@[x;z;:;y@x z]}[;;w]'[(x;y);({$[1<#x;,x;x]}';*:')]}    /join literals
 k:{x{j . x,y}/`i`s}
-w:k h w@
+w:k h strip semi w@
 /
 s:"-1 2 -'a;`a 12 `ab`c \"cd\" {(+/|:)x} /c"
 `0:"\"",s,"\" tokenized with list literals and source positions"
 w s
 \
 /E:E;e|e e:nve|te| t:n|v v:tA|V n:t[E]|(E)|{E}|N  from the original by atw (see parserclub)
-c:{$[~^`u`v?@x;"v";`w=@x;"a";|/";)]}\n "~\:x;";";" "]}
+c:{$[~^`u`v?@x;"v";`w=@x;"a";|/";)]} "~\:x;";";" "]}
 n:{-1+i+:1};q:{";"=c s i}
-E:{|/"\n;{[("~\:s n`}{e t`}\
+E:{|/";{[("~\:s n`}{e t`}\
 l:{$["["~s 1+j:i;[n`;j,,/|(E e t`;,E i)];E x]}                                                      /lambda {[a]a}
 t:{$[q`;1+#s;{("["~s i)|"a"=c s i}{$["["~s i;E x;(n`;x)]}/$["{"~s i;l i;~|/"(["~\:s i;n`;3>#x:E i;x 1;x]]}
 v:{("v"~c s x)|("a"~c s@*x)|(*x)~#s}                                                                        /verb?
