@@ -1,3 +1,4 @@
+/state machine from the original at ktye/i/p.k
 S:" \t"                     /space
 I:"({[;)}]"                 /singles
 V:"+-*%&|<>=^!~,#_$?@.'/\\" /verb
@@ -28,17 +29,16 @@ srrrrrrrrrrrrr
 t_)+a0q`++a';'"
 
 T:t[;0]?/:1_'t
-w:{p:-1_0,+\#'t:(&11>0{T[x;y]}\C x)_s::x;(t;p)} /tokens and source positions
-semi:{w:&{(y~,"\n")&|/" \t"~\:*x}':x 0;(@[x[0];w-1;:;(#w)#,,";"];x 1)} /"\n " -> "; "
-strip:{x@\:&{~((1<#x)&"/"~*x)||/" \t"=\:*x}'x[0]}
+run:{p:-1_0,+\#'t:(&11>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the machine -> tokens and source positions
+sem:{w:&{(y~,"\n")&|/" \t"~\:*x}':x 0;(@[x[0];w-1;:;(#w)#,,";"];x 1)}                                 /"\n " -> "; "
+str:{x@\:&{~((1<#x)&"/"~*x)||/" \t"=\:*x}'x[0]}                                            /strip space and comments
 
 err:{`0:s,"\n",(x#" "),"^";`err@y}                                             /error -- position caret under source
-f:+(("`"~*:;`s$1_);("\""~*:;::);({(|/~^V?x)|~^x?":"};{`p"(",x,")"});(|/~^a?;,`s$);(|/~^d?;`I$);(1=#:;*:))
-h:(+{[t;p]$[|/m:f[0]@\:t;$[|/*^i:f[1;*&m]t;err[p;"tok"];(i;p)];(t;p)]}').                         /value from string
-
-j:{(x;y):(&~=':z=@'x)_/:(x;y);w:&z=@'*'x;,/'{@[x;z;:;y@x z]}[;;w]'[(x;y);({$[1<#x;,x;x]}';*:')]}    /join literals
-k:{x{j . x,y}/`i`s}
-w:k h strip semi w@
+fns:+(("`"~*:;`s$1_);("\""~*:;::);({(|/~^V?x)|~^x?":"};{`p"(",x,")"});(|/~^a?;,`s$);(|/~^d?;`I$);(1=#:;*:))
+vst:(+{[t;p]$[|/m:fns[0]@\:t;$[|/*^i:fns[1;*&m]t;err[p;"tok"];(i;p)];(t;p)]}').                   /value from string
+jnl:{(x;y):(&~=':z=@'x)_/:(x;y);w:&z=@'*'x;,/'{@[x;z;:;y@x z]}[;;w]'[(x;y);({$[1<#x;,x;x]}';*:')]}    /join literals
+ajl:{x{jnl . x,y}/`i`s}
+w:ajl vst str sem run@                                                                               /w is the lexer
 /
 s:"-1 2 -'a;`a 12 `ab`c \"cd\" {(+/|:)x} /c"
 `0:"\"",s,"\" tokenized with list literals and source positions"
@@ -54,8 +54,8 @@ v:{("v"~c s x)|("a"~c s@*x)|(*x)~#s}                                            
 g:{$[v@*|x;(#s;{$[2=#x;x,1+#s;*x]}@-1_x;*|x);x]}                                      /if last is train make train
 e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(x;e f)]}
 P:{i::0;t s::x 0}
-p:{(x[0],(';::))P x:("[",0N),'$[`A=@x;x;w x]}                                              /parse tokens or string
-script:{p'+1_'/:(&("\n"~)'t)_/:(t;pos):("\n";0N),'w x}
+p:{(x[0],(';::))P x:("[",0N),'$[`C=@x;w x;x]}                                              /parse tokens or string
+pf:{p'+1_'/:(&("\n"~)'t)_/:(t;pos):("\n";0N),'w x}                             /parse file - return list of parses
 /
 p"{+x}[0]"
 p"{x}"
