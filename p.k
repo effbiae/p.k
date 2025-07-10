@@ -29,7 +29,7 @@ t_)+a0q`++a';'"
 
 T:t[;0]?/:1_'t
 w:{p:-1_0,+\#'t:(&11>0{T[x;y]}\C x)_s::x;(t;p)} /tokens and source positions
-semi:{w:&{(y~,"\n")&|/" \t"~\:*x}':x 0;(@[ \x[0];w-1;:;(#w)#,,";"];x 1)} /"\n " -> "; "
+semi:{w:&{(y~,"\n")&|/" \t"~\:*x}':x 0;(@[x[0];w-1;:;(#w)#,,";"];x 1)} /"\n " -> "; "
 strip:{x@\:&{~((1<#x)&"/"~*x)||/" \t"=\:*x}'x[0]}
 
 err:{`0:s,"\n",(x#" "),"^";`err@y}                                             /error -- position caret under source
@@ -54,7 +54,8 @@ v:{("v"~c s x)|("a"~c s@*x)|(*x)~#s}                                            
 g:{$[v@*|x;(#s;{$[2=#x;x,1+#s;*x]}@-1_x;*|x);x]}                                      /if last is train make train
 e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(x;e f)]}
 P:{i::0;t s::x 0}
-p:{(x[0],(';::))P x:("[",0N),'w x}
+p:{(x[0],(';::))P x:("[",0N),'$[`A=@x;x;w x]}                                              /parse tokens or string
+script:{p'+1_'/:(&("\n"~)'t)_/:(t;pos):("\n";0N),'w x}
 /
 p"{+x}[0]"
 p"{x}"
