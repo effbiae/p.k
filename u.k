@@ -5,23 +5,23 @@
 bra:{x,(";"/v'y),("[({"!"])}")x} /bracket with [({
 par:{"(",x,")"}
 V1:`p'par'":+-*%&|<=>"
-adv:{a:**x;b:(*x)1;t:1_x
+adv:{a:**x;b:( \*x)1;t:1_x
  $[(|/(/;\)~\:a)&1=#t;(par par[v@b],$a),bra["[";t]
    (':)~a;$[^V1?b;`a+1;$[1=#t;par@(par v b),"'";1+`a]]
    par[v[b],$((';/;\;':;/:;\:)!(';/;\;';/;\))@a]]}
-v:{$[~#x;""
+v:{$[~# \x;""
      |/`I`i=@x;$x
      `s=@x;"`",$x
      `S=@x;$[1=#x;$*x;,/"`",/:$x]
-     `c=@*x;$["\""~*x;x;bra[*x;1_x]]
      (0:)~*x;$[2=#x;("-1_\"\\n\"\\<[`$",(x 1),"]");"boogey"]
      ((:)~*x)&`S~@x 1;(o x 1),":",o x 2
      |/`u`v=@x;$x
+     `c=@*x;$["\""~*x;x;bra[*x;1_x]]
+     (`w=@*x);$[2=#x;par@(par@v[x 1]),$*x;`a+1+"need to handle ,//"]
      (`w=@**x);adv x
-     (`w=@*x);`a+1+"need to handle ,//"
      1<#x;(o@*x),bra["[";1_x]
      [ \"no"; \x;`a+1]]}
-u:{$[(:)~*x;v x;" \\",v x]} /ktye/k needs explicit print
+u:{$[(:)~* \x;v x;" \\",v x]} /ktye/k needs explicit print
 /
 u p.p"{x+y}"
 u p.p"{x+y}[0;1]"
