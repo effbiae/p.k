@@ -5,25 +5,29 @@
 bra:{x,(";"/v'y),("[({"!"])}")x} /bracket with [({
 par:{"(",x,")"}
 V1:`p'par'":+-*%&|<=>"
-adv:{a:**x;b:( \*x)1;t:1_x
+cal:{(v@*x),bra["[";1_x]}
+ecp:{[a;b;t]$[^V1?b;`a+1;[d:par@(par v b),"'";$[1=#t;d,bra["[";t];"1_",d,par["(,",v[*t],"),",v[t 1]]]]]}
+adv:{a:**x;b:(*x)1;t:1_x
  $[(|/(/;\)~\:a)&1=#t;(par par[v@b],$a),bra["[";t]
-   (':)~a;$[^V1?b;`a+1;$[1=#t;par@(par v b),"'";1+`a]]
+   (':)~a;ecp[a;b;t]
    par[v[b],$((';/;\;':;/:;\:)!(';/;\;';/;\))@a],bra["[";t]]}
+vrb:{$[($)~*x;$[`I~x 1;"(`i$",v[x 2],")";cal x];]}
 vad:{$[(`w=@*x);$[2=#x;par@(par@v[x 1]),$*x;`a+1+"need to handle ,//"]
        (`w=@**x);adv x
        |/`u`v=@x;$x
- ]}
-oth:{$[~# \x;""
+       |/`u`v=@*x;vrb x
+      ]}
+oth:{$[~#x;""
      |/`I`i=@x;$x
      `s=@x;"`",$x
      `S=@x;$[1=#x;$*x;,/"`",/:$x]
      (0:)~*x;$[2=#x;("-1_\"\\n\"\\<[`$",(x 1),"]");"boogey"]
      ((:)~*x)&`S~@x 1;(v x 1),":",v x 2
      `c=@*x;$["\""~*x;x;bra[*x;1_x]]
-     1<#x;(v@*x),bra["[";1_x]
+     1<#x;cal x
      ]}
 v:{$[a:vad@x;:a;];$[a:oth@x;:a;[ \"no"; \x;`a+1]]}
-u:{$[(:)~* \x;v x;" \\",v x]} /ktye/k needs explicit print
+u:{$[(:)~*x;v x;" \\",v x]} /ktye/k needs explicit print
 /
 u p.p"{x+y}"
 u p.p"{x+y}[0;1]"
