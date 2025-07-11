@@ -8,7 +8,7 @@ mbp:{$[~^`I`i`S`s`C?@x;;par]v x}
 V1:`p'par'":+-*%&|<=>"
 cal:{$[(~^`u`v?@*x)&4>#x;$[1=#x;`+1;2=#x;($*x),v x 1;3=#x;mbp[x 1],($*x),v x 2;`+1];(v@*x),bra["[";1_x]]}
 ep:"eachprior:{$[#y;(x').(y;0N,-1_y);y]}";ddy:{[v;t]"(,",v[*t],"),",v t 1}
-ecp:{[a;b;t]$[1<#t;"1_";""],"eachprior[",(v b),";",$[1=#t;v@*t;2=#t;ddy[v;t];`+1],"]"}
+ecp:{[a;b;t]("";"1_")[1<#t],"eachprior[",(v b),";",$[1=#t;v@*t;2=#t;ddy[v;t];`+1],"]"}
 adv:{a:**x;b:(*x)1;t:1_x
  $[(~^(/;\)?a);$[1=#t;(mbp[b],$a),bra["[";t];2=#t;$[(\)~a;"1_";""],mbp[b],($a),ddy[v;t];`+"multi/\\"]
    (':)~a;ecp[a;b;t]
