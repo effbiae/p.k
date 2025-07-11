@@ -30,8 +30,8 @@ t_)+a0q`++a';'"
 
 T:t[;0]?/:1_'t
 run:{p:-1_0,+\#'t:(&11>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the machine -> tokens and source positions
-sem:{w:&{(y~,"\n")&|/" \t"~\:*x}':x 0;(@[x[0];w-1;:;(#w)#,,";"];x 1)}                                 /"\n " -> "; "
-str:{x@\:&{~((1<#x)&"/"~*x)||/" \t"=\:*x}'x[0]}                                            /strip space and comments
+sem:{w:&{(y~,"\n")&|/" \t"~\:*x}':*x;(@[*x;w-1;:;(#w)#,,";"];x 1)}                                    /"\n " -> "; "
+str:{x@\:&{~((1<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                              /strip space and comments
 
 err:{`0:s,"\n",(x#" "),"^";`err@y}                                             /error -- position caret under source
 fns:+(("`"~*:;`s$1_);("\""~*:;::);({(|/~^V?x)|~^x?":"};{`p"(",x,")"});(|/~^a?;,`s$);(|/~^d?;`I$);(1=#:;*:))
