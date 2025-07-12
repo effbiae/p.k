@@ -8,28 +8,31 @@ C:@[;;:;]/[-1+&256;0+C;!#C]@0+
 
 t:2_"\n"\"
  _)+a0q`-:e/n\\
-__)+a0q`-+a/_t
-;_)+a0q`-+a';'
-)_)+a0q`++a';'
-+_)+a0q`-:a';'
-'_)+a0q`-:a';'
-a_)+bbq`++b';'
-0_)+11q`+:e';'
+n_)+a0q`-+a/ny
+yzzzzzzzzzzznz
+__)+a0q`-+a/nt
+;_)+a0q`-+a'n'
+)_)+a0q`++a'n'
++_)+a0q`-:a'n'
+'_)+a0q`-:a'n'
+a_)+bbq`++b'n'
+0_)+11q`+:e'n'
 qrrrrrtrrrrrrs
-`_)+b0q`++b';'
--_)+a1q`-:a';'
-/ccccccccccc_c
-cccccccccccc_c
-:_)+a0q`-+a';'
-b_)+bbq`++b';'
-1_)+11q`++e';'
-e_)+11q`1+1';'
+`_)+b0q`++b'n'
+-_)+a1q`-:a'n'
+/cccccccccccnc
+ccccccccccccnc
+zzzzzzzzzzzznz
+:_)+a0q`-+a'n'
+b_)+bbq`++b'n'
+1_)+11q`++e'n'
+e_)+11q`1+1'n'
 rrrrrrtrrrrrrs
 srrrrrrrrrrrrr
-t_)+a0q`++a';'"
+t_)+a0q`++a'n'"
 
 T:t[;0]?/:1_'t
-run:{p:-1_0,+\#'t:(&11>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the machine -> tokens and source positions
+run:{p:-1_0,+\#'t:(&12>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the machine -> tokens and source positions
 sem:{w:&{(y~,"\n")&|/" \t"~\:*x}':*x;(@[*x;w-1;:;(#w)#,,";"];x 1)}                                    /"\n " -> "; "
 str:{x@\:&{~((1<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                              /strip space and comments
 
@@ -55,7 +58,10 @@ g:{$[v@*|x;(#s;{$[2=#x;x,1+#s;*x]}@-1_x;*|x);x]}                                
 e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(x;e f)]}
 P:{i::0;t s::x 0}
 p:{(x[0],(';::))P x:("[",0N),'$[`C=@x;w x;x]}                                                /parse tokens or string
-pf:{p'((""~*:)')_{$[(#)~***x;1_x;x]}@+1_'/:(&("\n"~)'t)_/:(t;pos):("\n";0N),'w x}      /parse file -> list of parses
+pf:{      /parse file -> list of parses
+ nls:{1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x} /split on newlines
+ hab:{$[(#)~***x;1_x;x]} /#!
+ p'((""~*:)')_hab@+nls@w x}
 /
 p"{+x}[0]"
 p"{x}"
