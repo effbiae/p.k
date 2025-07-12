@@ -9,7 +9,7 @@ C:@[;;:;]/[-1+&256;0+C;!#C]@0+
 t:2_"\n"\"
  _)+a0q`-:e/n\\
 n_)+a0q`-+a/ny
-yzzzzzzzzzzznz
+ycccccccccccnc
 __)+a0q`-+a/nt
 ;_)+a0q`-+a'n'
 )_)+a0q`++a'n'
@@ -22,7 +22,6 @@ qrrrrrtrrrrrrs
 -_)+a1q`-:a'n'
 /cccccccccccnc
 ccccccccccccnc
-zzzzzzzzzzzznz
 :_)+a0q`-+a'n'
 b_)+bbq`++b'n'
 1_)+11q`++e'n'
@@ -34,7 +33,7 @@ t_)+a0q`++a'n'"
 T:t[;0]?/:1_'t
 run:{p:-1_0,+\#'t:(&13>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the machine -> tokens and source positions
 sem:{w:&{(y~,"\n")&|/" \t"~\:*x}':*x;(@[*x;w-1;:;(#w)#,,";"];x 1)}                                    /"\n " -> "; "
-str:{x@\:&{~((1<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                              /strip space and comments
+str:{x@\:&{~((2<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                              /strip space and comments
 
 err:{`0:s,"\n",(y#" "),"^","\n",x;`err@z}                                             /error -- position caret under source
 fns:+(({("\\"~*x)&1<#x};,:);("`"~*:;`s$1_);("\""~*:;::);(|/~^a?;,`s$);({(|/~^V?x)|~^x?":"};{`p@"(",x,")"})
