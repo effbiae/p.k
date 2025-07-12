@@ -6,11 +6,10 @@ par:{"(",x,")"}
 mbp:{$[~^`I`i`S`s`C?@x;;par]u x}
 cal:{$[(~^`u`v?@*x)&4>#x;$[1=#x;`+1;2=#x;par($*x),u x 1;3=#x;par@mbp[x 1],($*x),u x 2;`+1];(u@*x),bra["[";1_x]]}
 adv:{a:**x;b:(*x)1;t:1_x;mbp[b],($a),bra["[";t]}
-vrb:{cal x}
-case:{$[`w=@*x;(mbp@x 1),($*x)
+case:{$[`w=@*x;mbp[x 1],($*x)
        `w=@**x;adv x
-       ~^`u`v?@x;$x
-       ~^`u`v?@*x;vrb x
+        ~^`u`v?@x;$x
+        ~^`u`v?@*x;cal x
        `i=@x;$x
        `I=@x;" "/$x
        `s=@x;"`",$x
