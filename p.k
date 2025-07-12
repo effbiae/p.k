@@ -37,7 +37,7 @@ sem:{w:&{(y~,"\n")&|/" \t"~\:*x}':*x;(@[*x;w-1;:;(#w)#,,";"];x 1)}              
 str:{x@\:&{~((1<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                              /strip space and comments
 
 err:{`0:s,"\n",(y#" "),"^","\n",x;`err@z}                                             /error -- position caret under source
-fns:+(({("\\"~*x)&1<#x};::);("`"~*:;`s$1_);("\""~*:;::);({(|/~^V?x)|~^x?":"};{`p@"(",x,")"})
+fns:+(({("\\"~*x)&1<#x};,:);("`"~*:;`s$1_);("\""~*:;::);({(|/~^V?x)|~^x?":"};{`p@"(",x,")"})
       (|/~^a?;,`s$);(|/~^d?;`I$);(1=#:;*:))
 vst:(+{[t;p]$[|/m:fns[0]@\:t;(fns[1;*&m]t;p);(t;p)]}').                   /value from string
 jnl:{(x;y):(&~=':z=@'x)_/:(x;y);w:&z=@'*'x;,/'{@[x;z;:;y@x z]}[;;w]'[(x;y);({$[1<#x;,x;x]}';*:')]}    /join literals
@@ -62,7 +62,7 @@ p:{(x[0],(';::))P x:("[",0N),'$[`C=@x;w x;x]}                                   
 pf:{      /parse file -> list of parses
  nls:{1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x} /split on newlines
  hab:{$[(#)~***x;1_x;x]} /#!
- porsys:{$["\\"~**x;x;p x]}
+ porsys:{$[`C~@*x;x;p x]} /"\n\\ system command
  porsys'((""~*:)')_hab@+nls@w x}
 /
 p"{+x}[0]"
