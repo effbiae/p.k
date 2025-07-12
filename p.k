@@ -32,7 +32,7 @@ srrrrrrrrrrrrr
 t_)+a0q`++a'n'"
 
 T:t[;0]?/:1_'t
-run:{p:-1_0,+\#'t:(&12>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the machine -> tokens and source positions
+run:{p:-1_0,+\#'t:(&13>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the machine -> tokens and source positions
 sem:{w:&{(y~,"\n")&|/" \t"~\:*x}':*x;(@[*x;w-1;:;(#w)#,,";"];x 1)}                                    /"\n " -> "; "
 str:{x@\:&{~((1<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                              /strip space and comments
 
