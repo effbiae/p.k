@@ -5,8 +5,8 @@
 bra:{x,(";"/u'y),("[({"!"])}")x} /bracket with [({
 par:{"(",x,")"}
 mbp:{$[~^`I`i`S`s`C?@x;;par]u x}
-cal:{$[(~^`u`v?@*x)&4>#x;$[1=#x;`+1;2=#x;($*x),u x 1;3=#x;mbp[x 1],($*x),u x 2;`+1];(u@*x),bra["[";1_x]]}
-adv:{a:**x;b:(*x)1;t:1_x;mbp[b],($@a),bra["[";t]}
+cal:{$[(~^`u`v?@*x)&4>#x;$[1=#x;`+1;2=#x;($*x),u x 1;3=#x;par@mbp[x 1],($*x),u x 2;`+1];(u@*x),bra["[";1_x]]}
+adv:{a:**x;b:(*x)1;t:1_x;mbp[b],($a),bra["[";t]}
 vrb:{cal x}
 vad:{$[`w=@*x;(mbp@x 1),($*x)
        `w=@**x;adv x
@@ -23,4 +23,4 @@ oth:{$[~#x;""
      1<#x;cal x
      ]}
 u:{$[a:vad@x;:a;];$[a:oth@x;:a;[ \"no"; \x;`a+1]]}
-`0:u' \p.pf@  \1:"u.k"
+`0:u'p.pf@1:"u.k"
