@@ -33,9 +33,9 @@ run:{p:-1_0,+\#'t:(&11>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the ma
 sem:{w:&{(y~,"\n")&|/" \t"~\:*x}':*x;(@[*x;w-1;:;(#w)#,,";"];x 1)}                                    /"\n " -> "; "
 str:{x@\:&{~((1<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                              /strip space and comments
 
-err:{`0:s,"\n",(x#" "),"^";`err@y}                                             /error -- position caret under source
-fns:+(("`"~*:;`s$1_);("\""~*:;::);({(|/~^V?x)|~^x?":"};{`p"(",x,")"});(|/~^a?;,`s$);(|/~^d?;`I$);(1=#:;*:))
-vst:(+{[t;p]$[|/m:fns[0]@\:t;$[|/*^i:fns[1;*&m]t;err[p;"tok"];(i;p)];(t;p)]}').                   /value from string
+err:{`0:s,"\n",(y#" "),"^","\n",x;`err@z}                                             /error -- position caret under source
+fns:+(("`"~*:;`s$1_);("\""~*:;::);({(|/~^V?x)|~^x?":"};{`p@"(", \x,")"});(|/~^a?;,`s$);(|/~^d?;`I$);(1=#:;*:))
+vst:(+{[t;p]$[|/m:fns[0]@\:t;(fns[1;*&m]t;p);(t;p)]}').                   /value from string
 jnl:{(x;y):(&~=':z=@'x)_/:(x;y);w:&z=@'*'x;,/'{@[x;z;:;y@x z]}[;;w]'[(x;y);({$[1<#x;,x;x]}';*:')]}    /join literals
 ajl:{x{jnl . x,y}/`i`s}
 w:ajl vst str sem run@                                                                               /w is the lexer
