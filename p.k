@@ -1,14 +1,20 @@
 /
- w:  tokeniser           extended from ktye/i/p.k
+ w:  lexer               extended from ktye/i/p.k
  p:  parse expression    extended from the original from atw [1]
  pf: parse file          including lines starting "\\"
 
  doesn't yet handle float literals or long comments like this
+
+ tested on growler/k (see the self-unparser, u.k)
+
+ thanks to Douglas Mennella for feedback on the lexer and @ktye
+
+ July 2025
 \
 
-S:" \t"                     /space
-I:"({[;)}]"                 /singles
-V:"+-*%&|<>=^!~,#_$?@.'/\\" /verb
+S:" \t"
+I:"({[;)}]"
+V:"+-*%&|<>=^!~,#_$?@.'/\\"
 
 C:(S;I;V;".",a:_,/"aA"+\:!26;d:"0123456789"),"\"`-:e/\n\\"
 C:@[;;:;]/[-1+&256;0+C;!#C]@0+
@@ -62,11 +68,21 @@ e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(x;e f)]}
 P:{i::0;t s::x 0}
 
 p:{(x[0],(';::))P x:("[",0N),'$[`C=@x;w x;x]}                                                /parse tokens or string
-pf:{      /parse file -> list of parses
- nls:{1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x} /split on newlines
- hab:{$[(#)~***x;1_x;x]} /#!
- porsys:{$[`C~@*x;x;p x]} /"\n\\ system command as ,"\\\l p.k"
+pf:{                                                                              /parse file:  `C -> list of parses
+ nls:{1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x}                                                     /split on newlines
+ hab:{$[(#)~***x;1_x;x]}                                                                                         /#!
+ porsys:{$[`C~@*x;x;p x]}                                                      /"\n\\" system command as ,"\\\l p.k"
  porsys'((""~*:)')_hab@+nls@w x}
 
-/p""   this segfaults: trace it back to w "" -- prototypes?  known problem "{[x]+-}"
-/p'" "\"x;y (x;y) f[x;y] x+y x+*y 1+3*x (+x)%y (+/x)%#x x+m[*i]/y 1+3+-: 9(+\\|:)\\2#1")
+/
+ p""   this segfaults: trace it back to w "" -- prototypes?  known problem "{[x]+-}"
+ p'" "\"x;y (x;y) f[x;y] x+y x+*y 1+3*x (+x)%y (+/x)%#x x+m[*i]/y 1+3+-: 9(+\\|:)\\2#1")
+
+[1]
+c:@[127#" ";("['/\\";":+-*%!&|<>=~,^#_$?@.";";)] ");"av;"]
+n:{s -1+i+:1};q:{";"=c s i}
+E:{|/ ";[("=n`}{e t`}\
+t:{$[q`;;{"a"=c s i}{$["["=s i;E x;(n`;x)]}/$[~"("=s i;n`;3>#x: \E s i;x 1;x]]}
+e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;(f;x;e t`);(x;e f)]}
+p:{i::0;t s::"(",x}
+p'x:("x;y";"(x;y)";"f[x;y]";"x+y";"x+*y";"1+3*x";"(+x)%y";"(+/x)%#x";"x+m[*i]/y")
