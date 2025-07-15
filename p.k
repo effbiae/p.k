@@ -37,7 +37,8 @@ run:{p:-1_0,+\#'t:(&13>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the ma
 sem:{w:&{(y~,"\n")&x~," "}':*x;(@[*x;w-1;:;(#w)#,,";"];x 1)}                                          /"\n " -> "; "
 str:{x@\:&{~((2<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                              /strip space and comments
 
-fns:+(("`"~*:;`s$1_);("\""~*:;::)                          /`.. to symbol
+fns:+(("`"~*:;`s$1_)                                       /`.. to symbol
+      ("\""~*:;::)                                 /don't process strings
       ({("\\"~*x)&2<#x};,:)                        /\.. to system command
       (|/~^a?;,`s$)                                  /letters to variable
       ({(|/~^V?x)|~^x?":"};{`p@"(",x,")"}) /to verb/adverb (also gets 1.)
