@@ -1,39 +1,41 @@
 S:" \t"
-I:"({[;)}]"
+L:"({[;"
+R:")}]"
 V:"+-*%&|<>=^!~,#_$?@.'/\\"
 
-C:(S;I;V;".",a:_,/"aA"+\:!26;d:"0123456789"),"\"`-:e/\n\\"
+C:(S;L;R;V;".",a:_,/"aA"+\:!26;d:"0123456789"),"\"`-:e/\n\\"
 C:@[;;:;]/[-1+&256;0+C;!#C]@0+
 
 t:2_"\n"\"
- _)+a0q`-:e/n\\
-n_)+a0q`-+a/ny
-ycccccccccccnc
-__)+a0q`-+a/nt
-;_)+a0q`-+a'n'
-)_)+a0q`++a'n'
-+_)+a0q`-:a'n'
-'_)+a0q`-:a'n'
-a_)+bbq`++b'n'
-0_)+11q`+:e'n'
-qrrrrrtrrrrrrs
-`_)+b0q`++b'n'
--_)+a1q`-:a'n'
-/cccccccccccBc
-ccccccccccccnc
-:_)+a0q`-+a'n'
-b_)+bbq`++b'n'
-1_)+11q`++e'n'
-e_)+11q`1+1'n'
-rrrrrrtrrrrrrs
-srrrrrrrrrrrrr
-t_)+a0q`++a'n'
-BBBBBBBBBBBBmB
-mBBBBBBBBBBBBd
-dBBBBBBBBBBBnB"
+ _()+a0q`-:e/n\\
+n_()+a0q`-+a/ny
+yccccccccccccnc
+__()+a0q`-+a/nt
+;_()+a0q`-+a'n'
+(_()+a0q`-+a'n'
+)_()+a0q`++a'n'
++_()+a0q`-:a'n'
+'_()+a0q`-:a'n'
+a_()+bbq`++b'n'
+0_()+11q`+:e'n'
+qrrrrrrtrrrrrrs
+`_()+b0q`++b'n'
+-_()+a1q`-:a'n'
+/ccccccccccccBc
+cccccccccccccnc
+:_()+a0q`-+a'n'
+b_()+bbq`++b'n'
+1_()+11q`++e'n'
+e_()+11q`1+1'n'
+rrrrrrrtrrrrrrs
+srrrrrrrrrrrrrr
+t_()+a0q`++a'n'
+BBBBBBBBBBBBBmB
+mBBBBBBBBBBBBBd
+dBBBBBBBBBBBBnB"
 
 T:t[;0]?/:1_'t
-run:{p:-1_0,+\#'t:(&13>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the machine -> tokens and source positions
+run:{p:-1_0,+\#'t:(&14>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the machine -> tokens and source positions
 sem:{w:&{(y~,"\n")&x~," "}':*x;(@[*x;w-1;:;(#w)#,,";"];x 1)}                                          /"\n " -> "; "
 str:{x@\:&{~((2<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                              /strip space and comments
 
