@@ -31,8 +31,11 @@ a_)+bbq`++b'n'
 qrrrrrtrrrrrrs
 `_)+b0q`++b'n'
 -_)+a1q`-:a'n'
-/cccccccccccnc
+/cccccccccccBc
 ccccccccccccnc
+BBBBBBBBBBBBmd
+mBBBBBBBBBBBBd
+dBBBBBBBBBBBnB
 :_)+a0q`-+a'n'
 b_)+bbq`++b'n'
 1_)+11q`++e'n'
@@ -41,24 +44,26 @@ rrrrrrtrrrrrrs
 srrrrrrrrrrrrr
 t_)+a0q`++a'n'"
 
+/
+\
 T:t[;0]?/:1_'t
-sem:{@[x;-1+&{("\n"=y)&" "=x}':x;:;";"]}                                                              /"\n " -> "; "
-run:{p:-1_0,+\#'t:(&13>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the machine -> tokens and source positions
-str:{x@\:&{~((2<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                              /strip space and comments
+run:{p:-1_0,+\#'t:(&13>0{T[x;y]}\C x)_s::x;(t;p)}                  /run the machine -> tokens and source positions
+sem:{w:&{(y~,"\n")&x~," "}':x;@[x;w-1;:;(#w)#,,";"]}                                             /"\n " -> "; "
+str:{x@\:&{~((2<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                            /strip space and comments
 
-fns:+(("`"~*:;`s$1_);("\""~*:;::)          /`.. to symbol
-      ({("\\"~*x)&2<#x};,:)                /\.. to system command
-      (|/~^a?;,`s$)                        /letters to variable
+fns:+(("`"~*:;`s$1_);("\""~*:;::)                         /`.. to symbol
+      ({("\\"~*x)&2<#x};,:)                       /\.. to system command
+      (|/~^a?;,`s$)                                 /letters to variable
       ({(|/~^V?x)|~^x?":"};{`p@"(",x,")"}) /to verb/adverb (also gets 1.)
-      (|/~^d?;`I$)                         /to integer
-      (1=#:;*:))                           /singletons to char
+      (|/~^d?;`I$)                                            /to integer
+      (1=#:;*:))                                      /singletons to char
 vst:(+{[t;p]$[|/m:fns[0]@\:t;(fns[1;*&m]t;p);(t;p)]}').                                           /value from string
 upcast:{$[~|/^(@'x)?`f;`f$;]x}
 jnl:{m:{~|/^x?@y}[z]
  (x;y):(&~=':m'x)_/:(x;y);w:&m'*'x;,/'{@[x;z;:;y@x z]}[;;w]'[(x;y);({$[1<#x;,upcast x;x]}';*:')]}   /join literals
 ajl:{x{jnl . x,,y}/(`f`i;,`s)}
 
-w:ajl vst str run sem@                                                                               /w is the lexer
+w:{$[x;ajl vst str sem run@x;(();!0)]}                                                            /w is the lexer
 
 /E:E;e|e e:nve|te| t:n|v v:tA|V n:t[E]|(E)|{E}|N
 c:{$[~^`u`v?@x;"v";`w=@x;"a";|/";)]} "~\:x;";";" "]}
@@ -73,11 +78,10 @@ P:{i::0;t s::x 0}
 p:{(x[0],(';::))P x:("[",0N),'$[`C=@x;w x;x]}                                                /parse tokens or string
 pf:{                                                                              /parse file:  `C -> list of parses
  nls:{1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x}                                                     /split on newlines
- hab:{$[(#)~***x;1_;]x}                                                                                          /#!
- {$[`C~@*x;x;p x]}'((""~*:)')_hab@+nls@w x}                                           /system command as ,"\\\l p.k"
+ hsh:{$[(#)~***x;1_;]x}                                                                                          /#!
+ {$[`C~@*x;x;p x]}'((""~*:)')_hsh@+nls@w x}                                           /system command as ,"\\\l p.k"
 
 /
- p"" segfaults: trace it back to w "" -- prototypes?
  p'" "\"x;y (x;y) f[x;y] x+y x+*y 1+3*x (+x)%y (+/x)%#x x+m[*i]/y 1+3+-: 9(+\\|:)\\2#1")
 
 [1]
