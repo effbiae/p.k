@@ -1,15 +1,13 @@
 /
  w:  lexer               extended from ktye/i/p.k
  p:  parse expression    extended from the original from atw [1]
- pf: parse file          including lines starting "\\"
+ pf: parse file
 
- doesn't yet handle float literals or long comments like this
+ TODO
+  . doesn't yet handle float literals or long comments like this
+  . fails quietly on bad input
 
  tested on growler/k (see the self-unparser, u.k)
-
- thanks to Douglas Mennella for feedback on the lexer and @ktye
-
- July 2025
 \
 
 S:" \t"
@@ -51,8 +49,10 @@ str:{x@\:&{~((2<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                   
 fns:+(("`"~*:;`s$1_);("\""~*:;::);({("\\"~*x)&2<#x};,:);(|/~^a?;,`s$);({(|/~^V?x)|~^x?":"};{`p@"(",x,")"})
       (|/~^d?;`I$);(1=#:;*:))
 vst:(+{[t;p]$[|/m:fns[0]@\:t;(fns[1;*&m]t;p);(t;p)]}').                                           /value from string
-jnl:{(x;y):(&~=':z=@'x)_/:(x;y);w:&z=@'*'x;,/'{@[x;z;:;y@x z]}[;;w]'[(x;y);({$[1<#x;,x;x]}';*:')]}    /join literals
-ajl:{x{jnl . x,y}/`i`s}
+upcast:{x;$[~|/^(@'x)?`f;`f$x;x]}
+jnl:{m:{~|/^x?@y}[z]
+ (x;y):(&~=':m'x)_/:(x;y);w:&m'*'x;,/'{@[x;z;:;y@x z]}[;;w]'[(x;y);({$[1<#x;,upcast x;x]}';*:')]}   /join literals
+ajl:{x{jnl . x,,y}/(`f`i;,`s)}
 
 w:ajl vst str sem run@                                                                               /w is the lexer
 
@@ -66,16 +66,14 @@ v:{("v"~c s x)|("a"~c s@*x)|(*x)~#s}                                            
 g:{$[v@*|x;(#s;{$[2=#x;x,1+#s;*x]}@-1_x;*|x);x]}                                        /if last is train make train
 e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(x;e f)]}
 P:{i::0;t s::x 0}
-
 p:{(x[0],(';::))P x:("[",0N),'$[`C=@x;w x;x]}                                                /parse tokens or string
 pf:{                                                                              /parse file:  `C -> list of parses
  nls:{1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x}                                                     /split on newlines
  hab:{$[(#)~***x;1_x;x]}                                                                                         /#!
- porsys:{$[`C~@*x;x;p x]}                                                      /"\n\\" system command as ,"\\\l p.k"
- porsys'((""~*:)')_hab@+nls@w x}
+ {$[`C~@*x;x;p x]}'((""~*:)')_hab@+nls@w x}                                           /system command as ,"\\\l p.k"
 
 /
- p""   this segfaults: trace it back to w "" -- prototypes?  known problem "{[x]+-}"
+ p"" segfaults: trace it back to w "" -- prototypes?
  p'" "\"x;y (x;y) f[x;y] x+y x+*y 1+3*x (+x)%y (+/x)%#x x+m[*i]/y 1+3+-: 9(+\\|:)\\2#1")
 
 [1]
