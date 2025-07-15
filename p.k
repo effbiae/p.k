@@ -44,12 +44,10 @@ rrrrrrtrrrrrrs
 srrrrrrrrrrrrr
 t_)+a0q`++a'n'"
 
-/
-\
 T:t[;0]?/:1_'t
-run:{p:-1_0,+\#'t:(&13>0{T[x;y]}\C x)_s::x;(t;p)}                  /run the machine -> tokens and source positions
-sem:{w:&{(y~,"\n")&x~," "}':x;@[x;w-1;:;(#w)#,,";"]}                                             /"\n " -> "; "
-str:{x@\:&{~((2<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                            /strip space and comments
+run:{p:-1_0,+\#'t:(&13>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the machine -> tokens and source positions
+sem:{w:&{(y~,"\n")&x~," "}':*x;(@[*x;w-1;:;(#w)#,,";"];x 1)}                                          /"\n " -> "; "
+str:{x@\:&{~((2<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                              /strip space and comments
 
 fns:+(("`"~*:;`s$1_);("\""~*:;::)                         /`.. to symbol
       ({("\\"~*x)&2<#x};,:)                       /\.. to system command
@@ -60,10 +58,10 @@ fns:+(("`"~*:;`s$1_);("\""~*:;::)                         /`.. to symbol
 vst:(+{[t;p]$[|/m:fns[0]@\:t;(fns[1;*&m]t;p);(t;p)]}').                                           /value from string
 upcast:{$[~|/^(@'x)?`f;`f$;]x}
 jnl:{m:{~|/^x?@y}[z]
- (x;y):(&~=':m'x)_/:(x;y);w:&m'*'x;,/'{@[x;z;:;y@x z]}[;;w]'[(x;y);({$[1<#x;,upcast x;x]}';*:')]}   /join literals
+ (x;y):(&~=':m'x)_/:(x;y);w:&m'*'x;,/'{@[x;z;:;y@x z]}[;;w]'[(x;y);({$[1<#x;,upcast x;x]}';*:')]}     /join literals
 ajl:{x{jnl . x,,y}/(`f`i;,`s)}
 
-w:{$[x;ajl vst str sem run@x;(();!0)]}                                                            /w is the lexer
+w:{$[x;ajl vst str sem run@x;(();!0)]}                                                               /w is the lexer
 
 /E:E;e|e e:nve|te| t:n|v v:tA|V n:t[E]|(E)|{E}|N
 c:{$[~^`u`v?@x;"v";`w=@x;"a";|/";)]} "~\:x;";";" "]}
