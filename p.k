@@ -1,10 +1,10 @@
 /
  w:  lexer               extended from ktye/i/p.k
- p:  parse expression    extended from the original from atw [1]
+ p:  parse expression    extended from atw [1]
  pf: parse file
 
  TODO
-  . doesn't yet handle float literals or long comments like this
+  . doesn't yet handle long comments like this
   . fails quietly on bad input
 
  tested on growler/k (see the self-unparser, u.k)
@@ -42,8 +42,8 @@ srrrrrrrrrrrrr
 t_)+a0q`++a'n'"
 
 T:t[;0]?/:1_'t
+sem:{@[x;(~^" \t"?x@1+)#&"\n"=x;:;";"]}                                                                   /"\n " -> "; "
 run:{p:-1_0,+\#'t:(&13>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the machine -> tokens and source positions
-sem:{w:&{(y~,"\n")&|/" \t"~\:*x}':*x;(@[*x;w-1;:;(#w)#,,";"];x 1)}                                    /"\n " -> "; "
 str:{x@\:&{~((2<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                              /strip space and comments
 
 fns:+(("`"~*:;`s$1_);("\""~*:;::);({("\\"~*x)&2<#x};,:);(|/~^a?;,`s$);({(|/~^V?x)|~^x?":"};{`p@"(",x,")"})
@@ -54,7 +54,7 @@ jnl:{m:{~|/^x?@y}[z]
  (x;y):(&~=':m'x)_/:(x;y);w:&m'*'x;,/'{@[x;z;:;y@x z]}[;;w]'[(x;y);({$[1<#x;,upcast x;x]}';*:')]}   /join literals
 ajl:{x{jnl . x,,y}/(`f`i;,`s)}
 
-w:ajl vst str sem run@                                                                               /w is the lexer
+w:ajl vst str run sem@                                                                               /w is the lexer
 
 /E:E;e|e e:nve|te| t:n|v v:tA|V n:t[E]|(E)|{E}|N
 c:{$[~^`u`v?@x;"v";`w=@x;"a";|/";)]} "~\:x;";";" "]}
@@ -69,7 +69,7 @@ P:{i::0;t s::x 0}
 p:{(x[0],(';::))P x:("[",0N),'$[`C=@x;w x;x]}                                                /parse tokens or string
 pf:{                                                                              /parse file:  `C -> list of parses
  nls:{1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x}                                                     /split on newlines
- hab:{$[(#)~***x;1_x;x]}                                                                                         /#!
+ hab:{$[(#)~***x;1_;]x}                                                                                          /#!
  {$[`C~@*x;x;p x]}'((""~*:)')_hab@+nls@w x}                                           /system command as ,"\\\l p.k"
 
 /
