@@ -42,12 +42,16 @@ srrrrrrrrrrrrr
 t_)+a0q`++a'n'"
 
 T:t[;0]?/:1_'t
-sem:{@[x;(~^" \t"?x@1+)#&"\n"=x;:;";"]}                                                                   /"\n " -> "; "
+sem:{@[x;-1+&{("\n"=y)&" "=x}':x;:;";"]}                                                              /"\n " -> "; "
 run:{p:-1_0,+\#'t:(&13>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the machine -> tokens and source positions
 str:{x@\:&{~((2<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                              /strip space and comments
 
-fns:+(("`"~*:;`s$1_);("\""~*:;::);({("\\"~*x)&2<#x};,:);(|/~^a?;,`s$);({(|/~^V?x)|~^x?":"};{`p@"(",x,")"})
-      (|/~^d?;`I$);(1=#:;*:))
+fns:+(("`"~*:;`s$1_);("\""~*:;::)          /`.. to symbol
+      ({("\\"~*x)&2<#x};,:)                /\.. to system command
+      (|/~^a?;,`s$)                        /letters to variable
+      ({(|/~^V?x)|~^x?":"};{`p@"(",x,")"}) /to verb/adverb (also gets 1.)
+      (|/~^d?;`I$)                         /to integer
+      (1=#:;*:))                           /singletons to char
 vst:(+{[t;p]$[|/m:fns[0]@\:t;(fns[1;*&m]t;p);(t;p)]}').                                           /value from string
 upcast:{$[~|/^(@'x)?`f;`f$;]x}
 jnl:{m:{~|/^x?@y}[z]
