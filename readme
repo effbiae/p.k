@@ -5,6 +5,13 @@ under growler/k, p.k provides
  p:  parse expression    extended from atw [1]
  pf: parse file
 
+eg:
+ \l p.k
+ p"{x+y}[0;1]"
+(("{";(+;,`x;,`y))
+ 0
+ 1)
+
 TODO
 
   error reporting -- p fails quietly on bad input
