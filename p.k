@@ -1,11 +1,3 @@
-/
- w:  lexer               extended from ktye/i/p.k
- p:  parse expression    extended from atw [1]
- pf: parse file          parses itself
-
- TODO error reporting -- p fails quietly on bad input
-\
-
 S:" \t"
 I:"({[;)}]"
 V:"+-*%&|<>=^!~,#_$?@.'/\\"
@@ -36,7 +28,7 @@ e_)+11q`1+1'n'
 rrrrrrtrrrrrrs
 srrrrrrrrrrrrr
 t_)+a0q`++a'n'
-BBBBBBBBBBBBmd
+BBBBBBBBBBBBmB
 mBBBBBBBBBBBBd
 dBBBBBBBBBBBnB"
 
@@ -75,14 +67,4 @@ pf:{                                                                            
  hsh:{$[(#)~***x;1_;]x}                                                                                          /#!
  {$[`C~@*x;x;p x]}'((""~*:)')_hsh nls w x}                                            /system command as ,"\\\l p.k"
 
-/
- p'" "\"x;y (x;y) f[x;y] x+y x+*y 1+3*x (+x)%y (+/x)%#x x+m[*i]/y 1+3+-: 9(+\\|:)\\2#1")
-
-[1]
-c:@[127#" ";("['/\\";":+-*%!&|<>=~,^#_$?@.";";)] ");"av;"]
-n:{s -1+i+:1};q:{";"=c s i}
-E:{|/ ";[("=n`}{e t`}\
-t:{$[q`;;{"a"=c s i}{$["["=s i;E x;(n`;x)]}/$[~"("=s i;n`;3>#x: \E s i;x 1;x]]}
-e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;(f;x;e t`);(x;e f)]}
-p:{i::0;t s::"(",x}
-p'x:("x;y";"(x;y)";"f[x;y]";"x+y";"x+*y";"1+3*x";"(+x)%y";"(+/x)%#x";"x+m[*i]/y")
+/ p'" "\"x;y (x;y) f[x;y] x+y x+*y 1+3*x (+x)%y (+/x)%#x x+m[*i]/y 1+3+-: 9(+\\|:)\\2#1")
