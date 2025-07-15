@@ -3,7 +3,7 @@ under growler/k, p.k provides
 
  w:  lexer               extended from ktye/i/p.k
  p:  parse expression    extended from atw [1]
- pf: parse file
+ pf: parse file          produces list of parses
 
 eg:
  \l p.k
@@ -11,13 +11,13 @@ eg:
 (("{";(+;,`x;,`y))
  0
  1)
-
-TODO
-
-  error reporting -- p fails quietly on bad input
-
+ pf@1:"p.k"  /parses itself
 
 $ make  #runs u.k to unparse itself and check it works
+
+
+TODO  error reporting -- p fails quietly on bad input
+
 
 
 [1]
