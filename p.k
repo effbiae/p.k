@@ -66,7 +66,7 @@ sem:{w:&{(y~,"\n")&x~," "}':*x;(@[*x;w-1;:;(#w)#,,";"];x 1)}                    
 str:{x@\:&{~((2<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                              /strip space and comments
 
 fns:+(("`"~*:;`s$1_)                                       /`.. to symbol
-      ("\""~*:;::)                                 /don't process strings
+      ("\""~*:;::)                       /don't process chars and strings
       ({("\\"~*x)&2<#x};,:)                        /\.. to system command
       (|/~^a?;,`s$)                                  /letters to variable
       ({(|/~^V?x)|~^x?":"};{`p@"(",x,")"}) /to verb/adverb (also gets 1.)
