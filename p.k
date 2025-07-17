@@ -45,7 +45,7 @@ a_()+bbq`++b'n'
 qrrrrrrtrrrrrrs
 `_()+b0q`++b'n'
 -_()+a1q`-:a'n'
-/ccccccccccccBc
+/ccccccccccccCc
 cccccccccccccnc
 :_()+a0q`-+a'n'
 b_()+bbq`++b'n'
@@ -54,9 +54,9 @@ e_()+11q`1+1'n'
 rrrrrrrtrrrrrrs
 srrrrrrrrrrrrrr
 t_()+a0q`++a'n'
-BBBBBBBBBBBBBmB
-mBBBBBBBBBBBBBd
-dBBBBBBBBBBBBnB"
+CCCCCCCCCCCCCmC
+mCCCCCCCCCCCCCd
+dCCCCCCCCCCCCnC"
 
 T:t[;0]?/:1_'t
 run:{p:-1_0,+\#'t:(&14>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the machine -> tokens and source positions
