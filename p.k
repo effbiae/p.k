@@ -1,3 +1,29 @@
+/ create C, the character classes and T from t, the finite state machine
+/ S,L,R,V correspond to the first 4 columns of t
+/ _ ( ) +  (space, left, right and verb)
+/ the remaining classes are alpha, digit and "`-:/\n\
+/ you can see these classes in the first row of t (which is a comment
+/ and not part of the machine)
+/ C then becomes a map from a character to an index into the columns of T
+/ t's rows are the states of the finite state machine and the columns 
+/ correspond to character classes.  the first column of t is also a 
+/ comment, and not part of the machine. this labels the states.
+/.
+/ to read how t lexes the string "10*2":
+/  . start in the first state, n (the first row starting with "n")
+/  . the first char is a digit (C["1"]~0) so the column in n labelled by 0 also 
+/    chooses state 0
+/  . go to state 0 (the row starting with 0)
+/  . the next char is 0 (also character class 0) so goto state 1
+/  . the next char is * (character class +) so goto state +
+/  . the final char is 2 (class 0) so goto state 0
+/.
+/ this process is mapped out by the expression 0{T[x;y]}\C"10*2" (see lambda "run")
+/ this evaluates to 9 17 6 9. the machine is designed so that the states cut the
+/ input string where the states are <14, so run cuts "10*2" like this:
+/  (&14>0{T[x;y]}\C s)_s:"10*2"
+/ ("10";,"*";,"2")
+
 S:" \t"
 L:"({[;"
 R:")}]"
@@ -49,7 +75,7 @@ fns:+(("`"~*:;`s$1_)                                       /`.. to symbol
 val:(+{[t;p]$[|/m:fns[0]@\:t;(fns[1;*&m]t;p);(t;p)]}').                                           /value from string
 upcast:{$[~|/^(@'x)?`f;`f$;]x}
 jnl:{m:{~|/^x?@y}[z]
- (x;y):(&~=':m'x)_/:(x;y);w:&m'*'x;,/'{@[x;z;:;y@x z]}[;;w]'[(x;y);({$[1<#x;,upcast x;x]}';*:')]}     /join literals
+ (x;y):(&~=':m'x)_/:(x;y);w:&m'*'x;,/'{@[x;z;:;y@x z]}[;;w]'[(x;y);({upcast@$[1<#x;,x;x]}';*:')]}     /join literals
 ajl:{x{jnl . x,,y}/(`f`i;,`s)}
 
 w:{$[x;ajl val str sem run@x;(();!0)]}                                                               /w is the lexer
