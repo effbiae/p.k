@@ -1,17 +1,15 @@
-/ create C, the character classes and T from t, the finite state machine
-/ S,L,R,V correspond to the first 4 columns of t
+/ create C, the character classes and T from ts, the finite state machine
+/ S,L,R,V correspond to the first 4 character classes
 / _ ( ) +  (space, left, right and verb)
-/ the remaining classes are alpha, digit and "`-:/\n\
-/ you can see these classes in the first row of t (which is a comment
-/ and not part of the machine)
-/ C then becomes a map from a character to an index into the columns of T
-/ t's rows are the states of the finite state machine and the columns 
-/ correspond to character classes.  the first column of t is also a 
-/ comment, and not part of the machine. this labels the states.
+/ the remaining classes are alpha, digit and " ` - : / \n \
+/  (you can see these classes in the first row of the long string ts.)
+/ ts's rows are the states of the finite state machine and the columns
+/ correspond to character classes.  the first column labels the states.
+/ C then becomes a map from a character to an index into the columns of ts
 /.
-/ to read how t lexes the string "10*2":
+/ to read how ts lexes the string "10*2":
 /  . start in the first state, n (the first row starting with "n")
-/  . the first char is a digit (C["1"]~0) so the column in n labelled by 0 also 
+/  . the first char is a digit (C["1"]~5) so column 5 in n labelled by 0
 /    chooses state 0
 /  . go to state 0 (the row starting with 0)
 /  . the next char is 0 (also character class 0) so goto state 1
@@ -32,7 +30,7 @@ V:"+-*%&|<>=^!~,#_$?@.'/\\"
 C:(S;L;R;V;".",a:_,/"aA"+\:!26;d:"0123456789"),"\"`-:e/\n\\"
 C:@[;;:;]/[-1+&256;0+C;!#C]@0+
 
-t:2_"\n"\"
+t:2_"\n"\ts:"
  _()+a0q`-:e/n\\
 n_()+a0q`-+a/ny
 yccccccccccccnc
