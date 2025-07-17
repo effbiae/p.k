@@ -1,6 +1,15 @@
 / create C, the character classes and T from ts, the finite state machine
 / S,L,R,V correspond to the first 4 character classes
 / _ ( ) +  (space, left, right and verb)
+
+S:" \t"
+L:"({[;"
+R:")}]"
+V:"+-*%&|<>=^!~,#_$?@.'/\\"
+
+C:(S;L;R;V;".",a:_,/"aA"+\:!26;d:"0123456789"),"\"`-:e/\n\\"
+C:@[;;:;]/[-1+&256;0+C;!#C]@0+
+
 / the remaining classes are alpha, digit and " ` - : / \n \
 /  (you can see these classes in the first row of the long string ts.)
 / ts's rows are the states of the finite state machine and the columns
@@ -23,14 +32,6 @@
 / run cuts "10*2" like this:
 /  (&14>0{T[x;y]}\C s)_s:"10*2"
 / ("10";,"*";,"2")
-
-S:" \t"
-L:"({[;"
-R:")}]"
-V:"+-*%&|<>=^!~,#_$?@.'/\\"
-
-C:(S;L;R;V;".",a:_,/"aA"+\:!26;d:"0123456789"),"\"`-:e/\n\\"
-C:@[;;:;]/[-1+&256;0+C;!#C]@0+
 
 t:2_"\n"\ts:"
  _()+a0q`-:e/n\\
