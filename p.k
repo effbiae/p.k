@@ -10,15 +10,17 @@
 / to read how ts lexes the string "10*2":
 /  . start in the first state, n (the first row starting with "n")
 /  . the first char is a digit (C["1"]~5) so column 5 in n labelled by 0
-/    chooses state 0
+/    chooses state 0 (note a char class and a state share the name "0")
 /  . go to state 0 (the row starting with 0)
-/  . the next char is 0 (also character class 0) so goto state 1
+/  . the next char is 0 (also character class 0) so look at column 5 of state
+/    0 and it is 1. so go to state 1
 /  . the next char is * (character class +) so goto state +
 /  . the final char is 2 (class 0) so goto state 0
 /.
 / this process is mapped out by the expression 0{T[x;y]}\C"10*2" (see lambda "run")
-/ this evaluates to 9 17 6 9. the machine is designed so that the states cut the
-/ input string where the states are <14, so run cuts "10*2" like this:
+/ this evaluates to 9 17 6 9 (the states the machine goes through). the machine
+/ is designed so that the states cut the input string where the states are <14, so
+/ run cuts "10*2" like this:
 /  (&14>0{T[x;y]}\C s)_s:"10*2"
 / ("10";,"*";,"2")
 
