@@ -70,7 +70,7 @@ fns:+(("`"~*:;`s$1_)                                       /`.. to symbol
       ("\""~*:;::)                       /don't process chars and strings
       ({("\\"~*x)&2<#x};,:)                        /\.. to system command
       (|/~^a?;,`s$)                                  /letters to variable
-      ({(|/~^V?x)|~^x?":"};{`p@"(",x,")"}) /to verb/adverb (also gets 1.)
+      ({(|/~^V?x)|~^x?":"};{**1_`p@"(",x,")"})     /to verb/adverb and 1.
       (|/~^d?;`I$)                                            /to integer
       (1=#:;*:))                                      /singletons to char
 val:(+{[t;p]$[|/m:fns[0]@\:t;(fns[1;*&m]t;p);(t;p)]}').                                           /value from string
@@ -91,10 +91,10 @@ v:{("v"~c s x)|("a"~c s@*x)|(*x)~#s}                                            
 g:{$[v@*|x;(#s;{$[2=#x;x,1+#s;*x]}@-1_x;*|x);x]}                                        /if last is train make train
 e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(x;e f)]}
 P:{i::0;t s::x 0}
-p:{(x[0],(';::))P x:("[",0N),'$[`C=@x;w x;x]}                                                /parse tokens or string
+p:{(x[0],(';::))P x:("[",0N),'$[`C=@x;w;]x}                                                  /parse tokens or string
 pf:{                                                                              /parse file:  `C -> list of parses
  nls:{+1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x}                                                    /split on newlines
  hsh:{$[(#)~***x;1_;]x}                                                                                          /#!
- {$[`C~@*x;x;p x]}'((""~*:)')_hsh nls w x}                                            /system command as ,"\\\l p.k"
+ {$[`C~@*x;;p]x}'((""~*:)')_hsh nls w x}                                               /system command as ,"\\l p.k"
 
-/ p'" "\"x;y (x;y) f[x;y] x+y x+*y 1+3*x (+x)%y (+/x)%#x x+m[*i]/y 1+3+-: 9(+\\|:)\\2#1")
+/ p'" "\"x;y (x;y) f[x;y] x+y x+*y 1+3*x (+x)%y (+/x)%#x x+m[*i]/y 1+3+-: 9(+\\|:)\\2#1"
