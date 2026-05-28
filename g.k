@@ -26,9 +26,14 @@ case:{$[ `w=@x;"aw+",$. x
          `I=@x;"{",(","/$x),"}"
          `s=@x;"as(\"",($x),"\")"
          `S=@x;$[1=#x;$*x;,/"`",/:$x]
-        `c=@*x;$["\""~*x;chs x;bra[*x;1_x]]
+         `C=@x;chs x
+        `c=@*x;bra[*x;1_x]
         `C=@*x;*x
           1<#x;cal x
        ]}
 g:{$[a:case@x;a;[ \x;`+1]]}
-`0:g'p.pf@1:0
+ary:{"x,y"}
+fgl:{((:)~*x)&(1=#x 1)&(`S~@x 1)&"{"~*x[2]}
+h:{$[fgl x; "A ",($*x 1),"(",(ary x 2),")_(",(g x),")"  /lambda assignment
+  g x]}
+`0:h'p.pf@1:0
