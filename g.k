@@ -7,24 +7,28 @@ v2:","\"dex,add,sub,mul,dvd,exc,mnm,mxm,ltn,gtn,eql,mtc,cat,crt,hsh,und,dlr,que,
 \d p
 \l p.k
 \d .
-Q:{$[x;;`+1]}
+Q:{$[x;;`+1]} /assert x
+pri:{$[`u=@x;v1@. x
+       `v=@x;v2@. x
+       `+1]}
 bra:{x,(";"/g'y),("[({"!"])}")x} /bracket with [({
 par:{"(",x,")"}
 mbp:{$[~^`I`i`S`s`C`u`v?@x;;par]g x}
-cal:{$[(~^`u`v?@*x)&4>#x;$[1=#x;`+1;2=#x;par($*x),g x 1;3=#x;par@mbp[x 1],($*x),g x 2;`+1];(g@*x),bra["[";1_x]]}
-adv:{,/$2 3\(';/;\;':;/:;\:)?*x}
+cal:{$[(~^`u`v?@*x)&4>#x;$[1=#x;`+1;2=#x;(pri@*x),"(",g[x 1],")";3=#x;par@mbp[x 1],($*x),g x 2;`+1];(g@*x),bra["[";1_x]]}
 chs:{$[1=#. x;"ac('",("\\'"/"'"\x[1+-2_!#x]),"')";"aCz(",x,")"]}
-case:{$[`w=@x;"aw+",,/$adv x
-       `w=@*x;[Q(2=#x);"ar(",(","/|g'x),")"] /derive the verb
-       `u=@x;v1[. x]
-       `v=@x;v2[. x]
-       `i=@x;$x
-       `I=@x;"{",(","/$x),"}"
-       `s=@x;"as(\"",($x),"\")"
-       `S=@x;$[1=#x;$*x;,/"`",/:$x]
-       `c=@*x;$["\""~*x;chs x;bra[*x;1_x]]
-       `C=@*x;*x
-       1<#x;cal x
+cmp:{(g x),"(",g[y],"(x,y))"}
+case:{$[ `w=@x;"aw+",$. x
+ (`w=@*x)&2=#x;"ar(",(","/|g'x),")" /derive the verb
+        (')~*x;cmp . 1_x /composition
+         `u=@x;"(au+",$[. x],")"
+         `v=@x;"(av+",$[. x],")"
+         `i=@x;"ai(",($x),")"
+         `I=@x;"{",(","/$x),"}"
+         `s=@x;"as(\"",($x),"\")"
+         `S=@x;$[1=#x;$*x;,/"`",/:$x]
+        `c=@*x;$["\""~*x;chs x;bra[*x;1_x]]
+        `C=@*x;*x
+          1<#x;cal x
        ]}
 g:{$[a:case@x;a;[ \x;`+1]]}
-`0:g'p.pf@1:"g.k"
+`0:g'p.pf@1:0

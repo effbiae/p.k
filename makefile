@@ -4,4 +4,5 @@ SHELL=bash
 K=k
 
 test:
-	$K u.k>t.k;diff t.k <($K t.k)
+	$K u.k>o.k;diff o.k <($K o.k)
+	$K g.k<t.k
