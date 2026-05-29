@@ -1,3 +1,8 @@
+/
+ p.k -- a complete k parser for ngn/growler/k
+\
+
+/ -- the lexer --
 / create C, the character classes and T from ts, the finite state machine
 / S,L,R,V correspond to the first 4 character classes
 / _ ( ) +  (space, left, right and verb)
@@ -96,5 +101,3 @@ pf:{                                                                            
  nls:{+1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x}                                                    /split on newlines
  hsh:{$[(#)~***x;1_;]x}                                                                                          /#!
  {$[`C~@*x;;p]x}'((""~*:)')_hsh nls w x}                                               /system command as ,"\\l p.k"
-
-/ p'" "\"x;y (x;y) f[x;y] x+y x+*y 1+3*x (+x)%y (+/x)%#x x+m[*i]/y 1+3+-: 9(+\\|:)\\2#1"
