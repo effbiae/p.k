@@ -9,7 +9,7 @@ fs:();fi:0
 str:{$[1=#x;1_;]`k@x}
 bra:{x,(";"/g'y),("[({"!"])}")x} /bracket with [({
 par:{"(",x,")"}
-ccl:{y;x,par@$[~^`C`c?@y;y;","/y]}
+ccl:{x,par@$[~^`C`c?@y;y;","/y]}
 cal:{[e;x]$[~^2 3?#x;ccl["_",($-1+#x),"$";g[e]'x];(g[e]@*x),bra["[";1_x]]}
 chs:{$[1=#. x;"ac('",("\\'"/"'"\x[1+-2_!#x]),"')";ccl["aCz",x]]}
 cmp:{[e;x;y]ccl["com";g[e]'(x;y)]} /reverse order of arg eval
@@ -27,7 +27,7 @@ case:{[e;x]
          `i=@x;ccl["ai";$x]
          `I=@x;"{",(","/$x),"}"
          `s=@x;ccl["as";ccl["us";str@$x]]
-         `S=@x;$[1=#x;$[~^e?*x;$*x;glu@*x];,/"`",/:$x]
+         `S=@x;$[1=#x;$[~^e?*x;ccl["_R";$*x];glu@*x];,/"`",/:$x]
          `C=@x;chs x
         "{"~*x;[x:lam x;ccl["ax";(x 0;$#x 1)]]
         `c=@*x;bra[*x;1_x]
