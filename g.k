@@ -9,22 +9,21 @@ fs:();fi:0
 str:{$[1=#x;1_;]`k@x}
 bra:{x,(";"/g'y),("[({"!"])}")x} /bracket with [({
 par:{"(",x,")"}
-mbp:{$[~^`I`i`S`s`C`u`v?@x;;par]g x}
 ccl:{y;x,par@$[~^`C`c?@y;y;","/y]}
-cal:{[e;x]$[~^2 3?#x;ccl["_",($-1+#x),"$";g[e]'|x];(g[e]@*x),bra["[";1_x]]}
+cal:{[e;x]$[~^2 3?#x;ccl["_",($-1+#x),"$";g[e]'x];(g[e]@*x),bra["[";1_x]]}
 chs:{$[1=#. x;"ac('",("\\'"/"'"\x[1+-2_!#x]),"')";ccl["aCz",x]]}
 cmp:{[e;x;y]ccl["com";g[e]'(x;y)]} /reverse order of arg eval
-locs:{?(,`x),,//$["{"~*x;;`S~@x;*x;x~*x;`x;o'x]}
-args:{$["{"~*x;[xyz:`x`y`z;|(1+|/xyz?locs@x)#xyz];`u=@x;,`x;`v=@x;`y`x;]}
-lam:{a:args x;n:"$",($fi+:1);fs,:,"Z A ",ccl[n;("A ",$:)'a],ccl["_";,g[a;x 1]];(n;a)}  /lambda
+locals:{?`x,,//$["{"~*x;();`S~@x;x;o'x]}
+args:{$["{"~*x;[xyz:`x`y`z;(1+|/xyz?locals@x)#xyz];`u=@x;,`x;`v=@x;`x`y;]}
+lam:{a:args x;n:"$$",($fi+:1);fs,:,"Z A ",ccl[n;("A ",$:)'a],ccl["_";,g[a;x 1]];(n;a)}  /lambda
 glu:{ccl["gg";ccl["as";ccl["us";str@$x]]]} /global lookup
 case:{[e;x]
       $[ `w=@x;"aw+",$. x
  (`w=@*x)&2=#x;ccl["ar";(g[e]x 1;$.*x)] /derive the verb
-        (:)~*x;ccl["gs";g[e]'(x 2;*x 1)]
+        (:)~*x;ccl["gs";g[e]'1_x]
         (')~*x;cmp[e] . 1_x /composition
-         `u=@x;"(au+",$[. x],")"
-         `v=@x;"(av+",$[. x],")"
+         `u=@x;par"au+",$[. x]
+         `v=@x;par"av+",$[. x]
          `i=@x;ccl["ai";$x]
          `I=@x;"{",(","/$x),"}"
          `s=@x;ccl["as";ccl["us";str@$x]]
@@ -37,11 +36,15 @@ case:{[e;x]
        ]}
 gla:{(0~.*x)&(`S~@x 1)&(1=#x 1)&"{"~*x[2]}
 g:{[e;x]$[a:case[e;x];a;[ \x;`+1]]}
-h:{$[|/^(:;::)?*x;"show",;"mr",]par g[0#`;x]}
+h:{ccl[$[|/^(:;::)?*x;"say";"mr"];g[0#`;x]]}
 fixverbs:{$[(2=#x)&`v~@*x;(.$[*x],":";o'x 1);x~*x;x;o'x]}
-s:h'fixverbs'p.pf@1:"t.k"
-`0:"#include<a.h>"
-`0:"Z A1(show,K1(\"`0:`k@\",x))"
-`0:"Z A2(_1$,_1(y,x))Z A3(_2$,_2(z,y,x))"
-`0:"Z A2(gs,*gp(y)=xR) //global set"
+s:h'fixverbs'p.pf@1:$[x;*x;"/dev/stdin"]
+`0:"#include<a.h>
+Z A1(say,K1(\"`0:`k@\",x))
+#define $1(f_,x_)       ({f_(x_);})
+#define $2(f_,x_,y_)    ({A x=x_,y=y_;f_(x,y);})
+#define $3(f_,x_,y_,z_) ({A x=x_,y=y_,z=z_;f_(x,y,z);})
+#define _1$(f,x)      $2(_1,f,x)
+#define _2$(f,x,y)    $3(_2,f,x,y)
+Z A2(gs,A*p=gp(x);I(p,mr(*p));*p=yR) //global set"
 `0:fs;`0:"A1(_main,";`0:{" ",x,";"}'s;`0:,")"
