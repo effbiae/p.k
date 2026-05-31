@@ -1,0 +1,4 @@
+#!/bin/bash
+B=/home/jack/codeberg/k
+K=$B/k
+$K g.k $1|cc -I$B -shared -fPIC -xc - -olibg.so && echo '(`"./libg.so"2:(`m;1))`'|$K
