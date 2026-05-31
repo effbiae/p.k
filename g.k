@@ -39,7 +39,7 @@ h:{"//",`k[x],"\n ",ccl[$[|/^(:;::)?*x;"say";"mr"];g[0#`;x]]}
 fixverbs:{$[(2=#x)&`v~@*x;(.$[*x],":";o x 1);x~*x;x;o'x]}
 s:h'fixverbs'p.pf@1:$[x;*x;"/dev/stdin"]
 `0:"#include<a.h>
-Z A1(say,K1(\"`0:`k@\",x))
+Z A1(say,out(_R(x)))
 Z A1(sayp,K1(\"`0:\\\"0123456789abcdef\\\"@/:16\\\\\",al(x)))
 #define $1(f_,x_)       ({f_(x_);})
 #define $2(f_,x_,y_)    ({A y=y_,x=x_;f_(x,y);})
@@ -48,4 +48,4 @@ Z A1(sayp,K1(\"`0:\\\"0123456789abcdef\\\"@/:16\\\\\",al(x)))
 #define _2$(f,x,y)    $3(_2,f,x,y)
 Z A gls(S s,A x)_(A*p=gp(sym(s));I(p&&*p,mr(*p));*p=xR) //global set
 Z A glg(S s)_(gg(sym(s)))                               //global get"
-`0:fs;`0:"A1(m,";`0:{" ",x,";"}'s;`0:,")"
+`0:fs;`0:"A1(m,";`0:{" ",x,";"}'s;`0:,";au)"
