@@ -23,6 +23,7 @@ case:{[e;x]
          `u=@x;par"au+",$[. x]
          `v=@x;par"av+",$[. x]
          `i=@x;ccl["ai";$x]
+         `f=@x;ccl["af";$x]
          `I=@x;"{",(","/$x),"}"
          `s=@x;ccl["sym";str@$x]
          `S=@x;$[1=#x;$[~^e?*x;ccl["_R";$*x];ccl["glg";str@$*x]];,/"`",/:$x]

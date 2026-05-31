@@ -74,9 +74,9 @@ str:{x@\:&{~((2<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                   
 fns:+(("`"~*:;`s$1_)                                       /`.. to symbol
       ("\""~*:;::)                       /don't process chars and strings
       ({("\\"~*x)&2<#x};,:)                        /\.. to system command
-      (|/~^a?;,`s$)                                  /letters to variable
+      (|/~^a?*:;,`s$)                                /letters to variable
       ({(|/~^V?x)|~^x?":"};{**1_`p@"(",x,")"})     /to verb/adverb and 1.
-      (|/~^d?;`I$)                                            /to integer
+      (|/~^d?;.:)                                              /to number
       (1=#:;*:))                                      /singletons to char
 val:(+{[t;p]$[|/m:fns[0]@\:t;(fns[1;*&m]t;p);(t;p)]}').                                           /value from string
 upcast:{$[~|/^(@'x)?`f;`f$;]x}
