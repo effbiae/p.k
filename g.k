@@ -13,7 +13,7 @@ cal:{[e;x]$[~^2 3?#x;ccl["_",($-1+#x),"$";g[e]'x];]}
 chs:{$[`c~@. x;"ac('",("\\'"/"'"\(-1_1_x)),"')";ccl["aCz",str@. x]]}
 cmp:{[e;x;y]ccl["com";g[e]'(x;y)]} /reverse order of arg eval
 locals:{loc:{?,//$["{"~*x;();`S~@x;x;x~*x;();o'x]};?`x,loc 1_x}
-args:{$["{"~*x;[xyz:`x`y`z;(1+|/xyz?locals@x)#xyz];`u=@x;,`x;`v=@x;`x`y;]}
+args:{(1+|/xyz?locals@x)#xyz:`x`y`z}
 lam:{a:args x;n:"$$",($fi+:1);fs,:,"Z A ",ccl[n;("A ",$:)'a],ccl["_";,g[a;x 1]];(n;a)}  /lambda
 case:{[e;x]
       $[ `w=@x;"aw+",$. x
@@ -36,7 +36,7 @@ gla:{(0~.*x)&(`S~@x 1)&(1=#x 1)&"{"~*x[2]}
 g:{[e;x]$[a:case[e;x];a;[ \x;`+1]]}
 h:{"//",`k[x],"\n ",ccl[$[|/^(:;::)?*x;"say";"mr"];g[0#`;x]]}
 fixverbs:{$[(2=#x)&`v~@*x;(.$[*x],":";o x 1);x~*x;x;o'x]}
-s:h'fixverbs'p.pf@1:$[x;*x;"/dev/stdin"]
+s:h'fixverbs'p.pf@1:$[x;*x;0]
 `0:"#include<a.h>
 Z A1(say,out(_R(x)))
 #define $1(f_,x_)       ({f_(x_);})
