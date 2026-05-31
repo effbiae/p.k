@@ -15,7 +15,7 @@ cmp:{[e;x;y]ccl["com";g[e]'(x;y)]} /reverse order of arg eval
 locals:{loc:{?,//$["{"~*x;();`S~@x;x;x~*x;();o'x]};?`x,loc 1_x}
 args:{(1+|/xyz?locals@x)#xyz:`x`y`z}
 lam:{a:args x;n:"$$",($fi+:1);fs,:,"Z A ",ccl[n;("A ",$:)'a],ccl["_";,g[a;x 1]];(n;a)}  /lambda
-t:{"({L t=now();F(",$[x],",_1$(",(g[0#`]@*s"{",y,"}"),",ai(0)));al(t=now()-t);})"}
+t:{"({L t=now();F(",$[x],",_1$(",(g[0#`]@*s"{",y,"}"),",ai(0)));al((t=now()-t+500)/1000);})"}
 case:{[e;x]
       $[ `w=@x;"aw+",$. x
  (`w=@*x)&2=#x;ccl["ar";(g[e]x 1;$.*x)] /derive the verb
