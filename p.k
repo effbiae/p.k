@@ -73,7 +73,7 @@ str:{x@\:&{~((2<#x)&"/"~*x)||/" \t"=\:*x}'*x}                                   
 
 fns:+(("`"~*:;`s$1_)                                       /`.. to symbol
       ("\""~*:;::)                       /don't process chars and strings
-      ({("\\"~*x)&2<#x};,:)                        /\.. to system command
+      ({("\\"~*x)&(1<#x)&~":"~x 1};,:)             /\.. to system command
       (|/~^a?*:;,`s$)                                /letters to variable
       ({(|/~^V?x)|~^x?":"};{**1_`p@"(",x,")"})     /to verb/adverb and 1.
       (|/~^d?;.:)                                              /to number
