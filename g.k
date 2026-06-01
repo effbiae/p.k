@@ -14,8 +14,12 @@ chs:{$[`c~@. x;"ac('",("\\'"/"'"\(-1_1_x)),"')";ccl["aCz",str@. x]]}
 cmp:{[e;x;y]ccl["com";g[e]'(x;y)]} /reverse order of arg eval
 locals:{loc:{?,//$["{"~*x;();`S~@x;x;x~*x;();o'x]};?`x,loc 1_x}
 args:{(1+|/xyz?locals@x)#xyz:`x`y`z}
-lam:{a:args x;n:"$$",($fi+:1);fs,:,"Z A ",ccl[n;("A ",$:)'a],ccl["_";,g[a;x 1]];(n;a)}  /lambda
+bda:{[a;x]"A r=({",g[a;x],";});",(,/,[;";"]'ccl["mr"]'$a),"r"}
+lam:{a:args x;n:"$$",($fi+:1);fs,:,"Z A ",ccl[n;("A ",$:)'a],ccl["_";bda[a;x 1]];(n;a)}  /lambda
 t:{"({L t=now();F(",$[x],",_1$(",(g[0#`]@*s"{",y,"}"),",ai(0)));al((t=now()-t+500)/1000);})"}
+sys:{$["\\t"~2#x;[x:2_x;$[":"~*x;[x:1_x;Q[~^i:*x?" "];n:`I$i#x;x:i_x];n:1];t[n;x]]
+       "\\m"~2#x;"bsm(0)"
+       Q[0]]}
 case:{[e;x]
       $[ `w=@x;"aw+",$. x
  (`w=@*x)&2=#x;ccl["ar";(g[e]x 1;$.*x)] /derive the verb
@@ -31,7 +35,7 @@ case:{[e;x]
          `C=@x;chs x
         "{"~*x;[x:lam x;ccl["ax";(x 0;$#x 1)]]
         `c=@*x;"[("
-        `C=@*x;[Q"\\t"~2#*x;x:2_*x;$[":"~*x;[x:1_x;Q[~^i:*x?" "];n:`I$i#x;x:i_x];n:1];t[n;x]] /\t:300
+        `C=@*x;sys@*x
           1<#x;cal[e;x]
        ]}
 gla:{(0~.*x)&(`S~@x 1)&(1=#x 1)&"{"~*x[2]}
