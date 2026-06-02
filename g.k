@@ -18,7 +18,7 @@ args:{(1+|/xyz?locals@x)#xyz:`x`y`z}
 increfs:{,/{ccl["_R";x],,";"}'(#').(.:;$!:)@\:(1>)_-1+#'=vars x}
 bda:{[a;x]increfs[x],g[a;x]}
 lam:{a:args x;n:"$$",($fi+:1);fs,:,"Z A ",ccl[n;("A ",$:)'a],ccl["_";bda[a;x 1]];(n;a)}  /lambda
-t:{"({L t=now();F(",$[x],",_1$(",(g[0#`]@*s"{",y,"}"),",ai(0)));al((t=now()-t+500)/1000);})"}
+t:{"({L t=now();F(",$[x],",",ccl["mr";"_1$(",(g[0#`]@*s"{",y,"}"),",ai(0)))"],";al((t=now()-t+500)/1000);})"}
 sys:{$["\\t"~2#x;[x:2_x;$[":"~*x;[x:1_x;Q[~^i:*x?" "];n:`I$i#x;x:i_x];n:1];t[n;x]]
        "\\m"~2#x;"bsm(0)"
        Q[0]]}
@@ -48,7 +48,7 @@ s:fixverbs'p.pf@
 in:1:$[x;*x;0]
 ss:h's in
 `0:"#include<a.h>
-Z A1(say,out(_R(x)))
+Z A1(say,out(x))
 #define $1(f_,x_)       ({f_(x_);})
 #define $2(f_,x_,y_)    ({A y=(y_);A x=(x_);f_(x,y);})
 #define $3(f_,x_,y_,z_) ({A z=(z_);A y=(y_);A x=(x_);f_(x,y,z);})
