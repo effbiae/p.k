@@ -12,10 +12,10 @@ ccl:{x,par@$[~^`C`c?@y;y;","/y]}
 cal:{[e;x]$[~^2 3?#x;ccl["_",($-1+#x),"$";g[e]'x];]}
 chs:{$[`c~@. x;"ac('",("\\'"/"'"\(-1_1_x)),"')";ccl["aCz",str@. x]]}
 cmp:{[e;x;y]ccl["com";g[e]'(x;y)]} /reverse order of arg eval
-vars:{,//$["{"~*x;();`S~@x;$[1=#x;x;()];x~*x;();o'x]}
+vars:{,//$["{"~*x;();(1=#x)&`S~@x;x;x~*x;();o'x]}
 locals:{?`x,vars 1_x}
 args:{(1+|/xyz?locals@x)#xyz:`x`y`z}
-increfs:{,/{ccl["_R";x],,";"}'(#').(.:;$!:)@\:(1>)_-1+#'=vars x}
+increfs:{,/{ccl["_R";x],";"}'(#').(.:;$!:)@\:(1>)_-1+#'=vars x}
 bda:{[a;x]increfs[x],g[a;x]}
 lam:{a:args x;n:"$$",($fi+:1);fs,:,"Z A ",ccl[n;("A ",$:)'a],ccl["_";bda[a;x 1]];(n;a)}  /lambda
 t:{"({L t=now();F(",$[x],",",ccl["mr";"_1$(",(g[0#`]@*s"{",y,"}"),",ai(0)))"],";al((t=now()-t+500)/1000);})"}
