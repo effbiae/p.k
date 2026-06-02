@@ -1,5 +1,5 @@
 /
- generate c. runs on itself to test p.k
+ generate c
 \
 \d p
 \l p.k
@@ -22,7 +22,7 @@ t:{"({L t=now();F(",$[x],",",ccl["mr";"_1$(",(g[0#`]@*s"{",y,"}"),",ai(0)))"],";
 sys:{$["\\t"~2#x;[x:2_x;$[":"~*x;[x:1_x;Q[~^i:*x?" "];n:`I$i#x;x:i_x];n:1];t[n;x]]
        "\\m"~2#x;"bsm(0)"
        Q[0]]}
-case:{[e;x]
+switch:{[e;x]
       $[ `w=@x;"aw+",$. x
  (`w=@*x)&2=#x;ccl["ar";(g[e]x 1;$.*x)] /derive the verb
         (:)~*x;ccl["gls";(str@$*x 1;g[e]x 2)]
@@ -41,14 +41,13 @@ case:{[e;x]
           1<#x;cal[e;x]
        ]}
 gla:{(0~.*x)&(`S~@x 1)&(1=#x 1)&"{"~*x[2]}
-g:{[e;x]$[a:case[e;x];a;[ \x;`+1]]}
-h:{"//",`k[x],"\n ",ccl[$[|/^(:;::)?*x;"say";"mr"];g[0#`;x]]}
+g:{[e;x]$[a:switch[e;x];a;[ \x;`+1]]}
+h:{"//",`k[x],"\n ",ccl[$[|/^(:;::)?*x;"out";"mr"];g[0#`;x]]}
 fixverbs:{$[(2=#x)&`v~@*x;(.$[*x],":";o x 1);x~*x;x;o'x]}
 s:fixverbs'p.pf@
 in:1:$[x;*x;0]
 ss:h's in
 `0:"#include<a.h>
-Z A1(say,out(x))
 #define $1(f_,x_)       ({f_(x_);})
 #define $2(f_,x_,y_)    ({A y=(y_);A x=(x_);f_(x,y);})
 #define $3(f_,x_,y_,z_) ({A z=(z_);A y=(y_);A x=(x_);f_(x,y,z);})
