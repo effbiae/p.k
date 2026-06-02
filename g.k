@@ -42,7 +42,7 @@ switch:{[e;x]
        ]}
 gla:{(0~.*x)&(`S~@x 1)&(1=#x 1)&"{"~*x[2]}
 g:{[e;x]$[a:switch[e;x];a;[ \x;`+1]]}
-h:{"//",`k[x],"\n ",ccl[$[|/^(:;::)?*x;"out";"mr"];g[0#`;x]]}
+h:{"//",`k[x],"\n ",ccl["mr";$[|/^(:;::)?*x;ccl["out"];]@g[0#`;x]]}
 fixverbs:{$[(2=#x)&`v~@*x;(.$[*x],":";o x 1);x~*x;x;o'x]}
 s:fixverbs'p.pf@
 in:1:$[x;*x;0]
