@@ -4,7 +4,7 @@
 \d p
 \l p.k
 \d .
-Q:{$[x;;`+1]} /assert x
+Q:{$[x;x;`+1]} /assert x
 fs:();fi:0
 str:{$[1=#x;1_;]`k@x}
 par:{"(",x,")"}
@@ -19,7 +19,7 @@ increfs:{,/{ccl["_R";x],";"}'(#').(.:;$!:)@\:(1>)_-1+#'=vars x}
 bda:{[a;x]increfs[x],g[a;x]}
 lam:{a:args x;n:"$$",($fi+:1);fs,:,"Z A ",ccl[n;("A ",$:)'a],ccl["_";bda[a;x 1]];(n;a)}  /lambda
 t:{"({L t=now();F(",$[x],",",ccl["mr";"_1$(",(g[0#`]@*s"{",y,"}"),",ai(0)))"],";al((t=now()-t+500)/1000);})"}
-sys:{$["\\t"~2#x;[x:2_x;$[":"~*x;[x:1_x;Q[~^i:*x?" "];n:`I$i#x;x:i_x];n:1];t[n;x]]
+sys:{$["\\t"~2#x;[x:2_x;$[":"~*x;[x:1_x;Q[i:x?" "];n:`I$i#x;x:i_x];n:1];t[n;x]]
        "\\m"~2#x;"bsm(0)"
        Q[0]]}
 switch:{[e;x]
@@ -40,11 +40,10 @@ switch:{[e;x]
         `C=@*x;sys@*x
           1<#x;cal[e;x]
        ]}
-gla:{(0~.*x)&(`S~@x 1)&(1=#x 1)&"{"~*x[2]}
-g:{[e;x]$[a:switch[e;x];a;[ \x;`+1]]}
+g:{[e;x]Q[switch[e;x]]}
 h:{"//",`k[x],"\n ",ccl["mr";$[|/^(:;::)?*x;ccl["out"];]@g[0#`;x]]}
-fixverbs:{$[(2=#x)&`v~@*x;(.$[*x],":";o x 1);x~*x;x;o'x]}
-s:fixverbs'p.pf@
+vtou:{$[(2=#x)&`v~@*x;(.$[*x],":";o x 1);x~*x;x;o'x]}
+s:vtou'p.pf@
 in:1:$[x;*x;0]
 ss:h's in
 `0:"#include<a.h>
