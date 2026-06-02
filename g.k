@@ -10,7 +10,7 @@ str:{$[1=#x;1_;]`k@x}
 par:{"(",x,")"}
 ccl:{x,par@$[~^`C`c?@y;y;","/y]}
 cal:{[e;x]$[~^2 3?#x;ccl["_",($-1+#x),"$";g[e]'x];]}
-chs:{$[`c~@. x;"ac('",("\\'"/"'"\(-1_1_x)),"')";ccl["aCz",str@. x]]}
+chs:{$[`c~@. x;"ac('",("\\'"/"'"\(-1_1_x)),"')";ccl["aCz";str@. x]]}
 cmp:{[e;x;y]ccl["com";g[e]'(x;y)]} /reverse order of arg eval
 vars:{,//$["{"~*x;();(1=#x)&`S~@x;x;x~*x;();o'x]}
 locals:{?`x,vars 1_x}
