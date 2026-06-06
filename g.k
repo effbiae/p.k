@@ -50,10 +50,10 @@ ss:h's in
 #define $1(f_,x_)       ({f_(x_);})
 #define $2(f_,x_,y_)    ({A y=(y_);A x=(x_);f_(x,y);})
 #define $3(f_,x_,y_,z_) ({A z=(z_);A y=(y_);A x=(x_);f_(x,y,z);})
-#define __t(x)         ({A _=(x);mr(t);_;})
-#define _1$(f,x)      ({A t=(f);__t($2(_1,t,x));})
-#define _2$(f,x,y)    ({A t=(f);__t($3(_2,t,x,y));})
-#define com$(x_,y)    ({A t=(x_);__t(com(t,y));})
+#define t(x)         ({A _=(x);mr(t);_;})
+#define _1$(f,x)      ({A t=(f);t($2(_1,t,x));})
+#define _2$(f,x,y)    ({A t=(f);t($3(_2,t,x,y));})
+#define com$(x_,y)    ({A t=(x_);t(com(t,y));})
 Z A gls(S s,A x)_(A*p=gp(sym(s));I(p&&*p,mr(*p));*p=xR) //global set
 Z A glg(S s)_(gg(sym(s)))                               //global get"
 `0:fs;`0:"A1(m,";`0:{" ",x,";"}'ss;`0:,"au)"
