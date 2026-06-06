@@ -11,7 +11,7 @@ par:{"(",x,")"}
 ccl:{x,par@$[~^`C`c?@y;y;","/y]}
 cal:{[e;x]$[~^2 3?#x;ccl["_",($-1+#x),"$";g[e]'x];]}
 chs:{$[`c~@. x;"ac('",("\\'"/"'"\(-1_1_x)),"')";ccl["aCz";str@. x]]}
-cmp:{[e;x;y]ccl["com";g[e]'(x;y)]} /reverse order of arg eval
+cmp:{[e;x;y]ccl["com$";g[e]'(x;y)]} /reverse order of arg eval
 vars:{,//$["{"~*x;();(1=#x)&`S~@x;x;x~*x;();o'x]}
 locals:{?`x,vars 1_x}
 args:{(1+|/xyz?locals@x)#xyz:`x`y`z}
@@ -50,8 +50,10 @@ ss:h's in
 #define $1(f_,x_)       ({f_(x_);})
 #define $2(f_,x_,y_)    ({A y=(y_);A x=(x_);f_(x,y);})
 #define $3(f_,x_,y_,z_) ({A z=(z_);A y=(y_);A x=(x_);f_(x,y,z);})
-#define _1$(f,x)      $2(_1,f,x)
-#define _2$(f,x,y)    $3(_2,f,x,y)
+#define __t(x)         ({A _=(x);mr(t);_;})
+#define _1$(f,x)      ({A t=(f);__t($2(_1,t,x));})
+#define _2$(f,x,y)    ({A t=(f);__t($3(_2,t,x,y));})
+#define com$(x_,y)    ({A t=(x_);__t(com(t,y));})
 Z A gls(S s,A x)_(A*p=gp(sym(s));I(p&&*p,mr(*p));*p=xR) //global set
 Z A glg(S s)_(gg(sym(s)))                               //global get"
 `0:fs;`0:"A1(m,";`0:{" ",x,";"}'ss;`0:,"au)"
