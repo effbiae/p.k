@@ -6,7 +6,7 @@
 \d .
 Q:{$[x;x;`+1]} /assert x
 fs:();fi:0
-str:{$[1=#x;1_;]`k@x}
+str:{x:$[`C~@x;x;$x];$[1=#x;1_;]`k@x}
 par:{"(",x,")"}
 ccl:{x,par@$[~^`C`c?@y;y;","/y]}
 prj:{[e;x]ccl["prj";g[e;*x],",(A[]){",(","/g[e]'1_x),"},",$#1_x]}
@@ -26,7 +26,7 @@ sys:{$["\\t"~2#x;[x:2_x;$[":"~*x;[x:1_x;Q[i:x?" "];n:`I$i#x;x:i_x];n:1];t[n;x]]
 switch:{[e;x]
      $[  `w=@x;"aw+",$. x
  (`w=@*x)&2=#x;ccl["ar";(g[e]x 1;$.*x)] /derive the verb
-        (:)~*x;ccl["gls";(str@$*x 1;g[e]x 2)]
+        (:)~*x;ccl["gls";(str@*x 1;g[e]x 2)]
         (')~*x;cmp[e]1_x /composition
          `u=@x;par"au+",$[. x]
          `v=@x;par"av+",$[. x]
@@ -34,7 +34,7 @@ switch:{[e;x]
          `f=@x;ccl["af";$x]
          `I=@x;"{",(","/$x),"}"
          `s=@x;ccl["sym";str@$x]
-         `S=@x;$[1=#x;$[~^e?*x;$*x;ccl["glg";str@$*x]];,/"`",/:$x]
+         `S=@x;$[1=#x;$[~^e?*x;$*x;ccl["glg";str@*x]];,/"`",/:$x]
          `C=@x;chs x
         "{"~*x;[x:lam x;ccl["ax";(x 0;$#x 1)]]
         `c=@*x;"[("
