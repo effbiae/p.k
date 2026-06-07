@@ -11,7 +11,7 @@ par:{"(",x,")"}
 ccl:{x,par@$[~^`C`c?@y;y;","/y]}
 prj:{[e;x]ccl["prj";g[e;*x],",(A[]){",(","/g[e]'1_x),"},",$#1_x]}
 cal:{[e;x]$[|/(x)~\:p.GAP;prj[e]x;$[~^2 3?#x;ccl["_",($-1+#x),"$";g[e]'x];]]}
-chs:{$[`c~@. x;"ac('",("\\'"/"'"\(-1_1_x)),"')";ccl["aCz";str@. x]]}
+chs:{$[`c~@a:. x;ccl["ac";$0+a];ccl["aCz";str@a]]}
 cmp:{[e;x;y]ccl["com$";g[e]'(x;y)]} /reverse order of arg eval
 vars:{,//$["{"~*x;();(1=#x)&`S~@x;x;x~*x;();o'x]}
 locals:{?`x,vars 1_x}
