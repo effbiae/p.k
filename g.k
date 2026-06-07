@@ -9,7 +9,8 @@ fs:();fi:0
 str:{$[1=#x;1_;]`k@x}
 par:{"(",x,")"}
 ccl:{x,par@$[~^`C`c?@y;y;","/y]}
-cal:{[e;x]$[~^2 3?#x;ccl["_",($-1+#x),"$";g[e]'x];]}
+prj:{[e;x]"prj(",g[e;*x],",(A[]){",(","/g[e]'1_x),"},",($#1_x),")"}
+cal:{[e;x]$[|/(x)~\:p.GAP;prj[e]x;$[~^2 3?#x;ccl["_",($-1+#x),"$";g[e]'x];]]}
 chs:{$[`c~@. x;"ac('",("\\'"/"'"\(-1_1_x)),"')";ccl["aCz";str@. x]]}
 cmp:{[e;x;y]ccl["com$";g[e]'(x;y)]} /reverse order of arg eval
 vars:{,//$["{"~*x;();(1=#x)&`S~@x;x;x~*x;();o'x]}
@@ -23,7 +24,8 @@ sys:{$["\\t"~2#x;[x:2_x;$[":"~*x;[x:1_x;Q[i:x?" "];n:`I$i#x;x:i_x];n:1];t[n;x]]
        "\\m"~2#x;"bsm(0)"
        Q[0]]}
 switch:{[e;x]
-      $[ `w=@x;"aw+",$. x
+     $[p.GAP~x;"GAP"
+         `w=@x;"aw+",$. x
  (`w=@*x)&2=#x;ccl["ar";(g[e]x 1;$.*x)] /derive the verb
         (:)~*x;ccl["gls";(str@$*x 1;g[e]x 2)]
         (')~*x;cmp[e] . 1_x /composition
