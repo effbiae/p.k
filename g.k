@@ -49,7 +49,7 @@ ss:h's in
 `0:"#include<a.h>
 #define _1$(x_,y_)    ({A y=(y_);A x=(x_);x(_1(x,y));})
 #define _2$(x_,y_,z_) ({A z=(z_);A y=(y_);A x=(x_);x(_2(x,y,z));})
-#define com$(x_,y_)    ({A y=(y_);A x=(x_);x(com(x,y));})
+#define com$(x_,y_)   ({A y=(y_);A x=(x_);x(com(x,y));})
 Z A gls(S s,A x)_(A*p=gp(sym(s));I(p&&*p,mr(*p));*p=xR) //global set
 Z A glg(S s)_(gg(sym(s)))                               //global get"
 `0:fs;`0:"A1(m,";`0:{" ",x,";"}'ss;`0:,"au)"

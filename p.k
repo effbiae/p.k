@@ -95,8 +95,8 @@ t:{$[q`;1+#s;{("["~s i)|"a"=c s i}{$["["~s i;E x;(n`;x)]}/$["{"~s i;l i;~|/"(["~
 v:{("v"~c s x)|("a"~c s@*x)|(*x)~#s}                                                                          /verb?
 g:{$[(~|/(:;::)~\:s@*x)&v@*|x;(#s;{$[2=#x;x,1+#s;*x]}@-1_x;*|x);x]}                     /if last is train make train
 e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(x;e f)]}
-P:{i::0;t s::x 0}
-p:{(x[0],(';::))P x:("[",0N),'$[`C=@x;w;]x}                                                  /parse tokens or string
+P:{i::0;t s::x 0};GAP:*|.@[;]
+p:{(x[0],(';GAP))P x:("[",0N),'$[`C=@x;w;]x}                                                  /parse tokens or string
 pf:{                                                                              /parse file:  `C -> list of parses
  nls:{+1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x}                                                    /split on newlines
  hsh:{$[(#)~***x;1_;]x}                                                                                          /#!
