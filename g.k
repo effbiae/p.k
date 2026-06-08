@@ -43,21 +43,21 @@ switch:{[e;x]
           1<#x;cal[e;x]
        ]}
 g:{[e;x]Q[switch[e;x]]}
-h:{"//",`k[x],"\n ",ccl["mre";$[|/^(:;::)?*x;ccl["oute"];]@g[0#`;x]]}
+h:{"//",`k[x],"\n ",ccl["mre";$[|/^(:;::)?*x;ccl["oue"];]@g[0#`;x]]}
 vtou:{$[(2=#x)&`v~@*x;(.$[*x],":";o x 1);x~*x;x;o'x]}
 s:vtou'p.pf@
 in:1:$[x;*x;0]
 ss:h's in
 `0:"#include<a.h>
 Z A e;
-#define $2(f,x_,y_)   ({A y=(y_);A x=y?(x_):0;x&&y?x(f(x,y)):y?y(0):0;})
-#define $3(f,x_,y_,z_)({A z=(z_);A y=z?(y_):0;A x=z&&y?(x_):0; \\
-                                              x&&y&&z?x(f(x,y,z)?:(e=aCz(#f),0)):y&&z?y(z(0)):z?z(0):0;})
+#define $2(f,x,y)   ({A $y=(y);A $x=$y?(x):0;A _;$x?_=f($x,$y),mr($x),_:$y?mr($y),0:0;})
+#define $3(f,x,y,z) ({A $z=(z);A $y=$z?(y):0;A $x=$y?(x):0; A _;\\
+                                              $x?(_=f($x,$y,$z),mr($x),_)?:(e=aCz(#f),0):$y?mr($y),mr($z),0:$z?mr($z),0:0;})
 #define _1$(x,y)    $2(_1,x,y)
 #define _2$(x,y,z)  $3(_2,x,y,z)
 #define com$(x,y)   $2(com,x,y)
 Z A gls(S s,A x)_(A*p=gp(sym(s));I(p&&*p,mr(*p));*p=xR) //global set
 Z A glg(S s)_(gg(sym(s)))                               //global get
-Z A oute(A x)_(x?out(x):0)
-#define mre(x_) ({A x=(x_);if(!x)return 0;mr(x);})"
+Z A1(oue,x?out(x):0)
+#define mre(x) ({A $x=(x);if(!$x)return 0;mr($x);})"
 `0:fs;`0:"A1(m,";`0:{" ",x,";"}'ss;`0:,"au)"
