@@ -12,7 +12,7 @@ L:"({[;"
 R:")}]"
 V:"+-*%&|<>=^!~,#_$?@.'/\\"
 
-C:(S;L;R;V;".",a:_,/"aA"+\:!26;d:"0123456789"),"\"`-:e/\n\\"
+C:(S;L;R;V;".";a:_,/"aA"+\:!26;d:"0123456789"),"\"`-:e/\n\\"
 C:@[;;:;]/[-1+&256;0+C;!#C]@0+
 
 / the remaining classes are alpha, digit and " ` - : / \n \
@@ -39,32 +39,32 @@ C:@[;;:;]/[-1+&256;0+C;!#C]@0+
 / ("10";,"*";,"2")
 
 t:2_"\n"\ts:"
- _()+a0q`-:e/n\\
-n_()+a0q`-+a/ny
-yccccccccccccnc
-__()+a0q`-+a/nt
-;_()+a0q`-+a'n'
-(_()+a0q`-+a'n'
-)_()+a0q`++a'n'
-+_()+a0q`-:a'n'
-'_()+a0q`-:a'n'
-a_()+bbq`++b'n'
-0_()+11q`+:e'n'
-qrrrrrrtrrrrrrs
-`_()+b0q`++b'n'
--_()+a1q`-:a'n'
-/ccccccccccccCc
-cccccccccccccnc
-:_()+a0q`-+a'n'
-b_()+bbq`++b'n'
-1_()+11q`++e'n'
-e_()+11q`1+1'n'
-rrrrrrrtrrrrrrs
-srrrrrrrrrrrrrr
-t_()+a0q`++a'n'
-CCCCCCCCCCCCCmC
-mCCCCCCCCCCCCCd
-dCCCCCCCCCCCCnC"
+ _()+.a0q`-:e/n\\
+n_()++a0q`-+a/ny
+ycccccccccccccnc
+__()++a0q`-+a/nt
+;_()++a0q`-+a'n'
+(_()++a0q`-+a'n'
+)_()++a0q`++a'n'
++_()++a0q`-:a'n'
+'_()++a0q`-:a'n'
+a_()+bbbq`++b'n'
+0_()++11q`+:e'n'
+qrrrrrrrtrrrrrrs
+`_()++b0q`++b'n'
+-_()++a1q`-:a'n'
+/cccccccccccccCc
+ccccccccccccccnc
+:_()++a0q`-+a'n'
+b_()++bbq`++b'n'
+1_()++11q`++e'n'
+e_()++11q`1+1'n'
+rrrrrrrrtrrrrrrs
+srrrrrrrrrrrrrrr
+t_()++a0q`++a'n'
+CCCCCCCCCCCCCCmC
+mCCCCCCCCCCCCCCd
+dCCCCCCCCCCCCCnC"
 
 T:t[;0]?/:1_'t
 run:{p:-1_0,+\#'t:(&14>0{T[x;y]}\C x)_s::x;(t;p)}                    /run the machine -> tokens and source positions
