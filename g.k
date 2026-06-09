@@ -20,8 +20,8 @@ args:{(1+|/xyz??`x,vars 1_x)#xyz:`x`y`z}
 increfs:{,//{ccl["_R";x],";"}''(#').(.:;$!:)@\:(1>)_-1+#'=vars x}
 bda:{[a;l;x](,/{"A ",$[x],"=0;"}'l),"\n ",increfs[x],g[a;x]}
 lam:{a:?args x;n:"$$",($fi+:1);fs,:,"Z A ",ccl[n;("A ",$:)'a],ccl["_";bda[a;locals 1_x;x 1]];(n;a)}  /lambda
-t:{"({L t=now();F(",$[x],",",ccl["mr";"_1$(0,",(g[0#`]@*s"{",y,"}"),",ai(0)))"],";al((t=now()-t+500)/1000);})"}
-sys:{$["\\t"~2#x;[x:2_x;$[":"~*x;[x:1_x;Q[i:x?" "];n:`I$i#x;x:i_x];n:1];t[n;x]]
+ti:{"({L t=now();F(",$[x],",",ccl["mr";"_1$(0,",(g[0#`]@*s"{",y,"}"),",ai(0)))"],";al((t=now()-t+500)/1000);})"}
+sys:{$["\\t"~2#x;[x:2_x;$[":"~*x;[x:1_x;Q[i:x?" "];n:`I$i#x;x:i_x];n:1];ti[n;x]]
        "\\m"~2#x;"bsm(0)"
        Q[0]]}
 switch:{[e;x]
@@ -44,7 +44,7 @@ switch:{[e;x]
        ]}
 g:{[e;x]Q[switch[e;x]]}
 h:{"//",`k[x],"\n ",ccl["mre";$[|/^(:;::)?*x;ccl["oue"];]@g[0#`;x]]}
-vtou:{$[(2=#x)&`v~@*x;(.$[*x],":";o x 1);x~*x;x;o'x]}
+vtou:(::) /{$[(2=#x)&`v~@*x;(.$[*x],":";o x 1);x~*x;x;o'x]}
 s:vtou'p.pf@
 in:1:$[x;*x;0]
 ss:h's in

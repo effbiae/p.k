@@ -92,11 +92,11 @@ n:{-1+i+:1};q:{";"=c s i}
 E:{|/";{[("~\:s n`}{e t`}\
 l:{$["["~s 1+j:i;[n`;j,,/|(E e t`;,E i)];E x]}                                                        /lambda {[a]a}
 t:{$[q`;1+#s;{("["~s i)|"a"=c s i}{$["["~s i;E x;(n`;x)]}/$["{"~s i;l i;~|/"(["~\:s i;n`;3>#x:E i;x 1;x]]}
-v:{("v"~c s x)|("a"~c s@*x)|(*x)~#s}                                                                          /verb?
+v:{("v"~c s x)|("a"~c s@*x)|(*x)~#s};m:{$[`v=@s x;s[x]:.$[s x],":";];x}                     /v:is verb? m:make monad
 g:{$[(~|/(:;::)~\:s@*x)&v@*|x;(#s;{$[2=#x;x,1+#s;*x]}@-1_x;*|x);x]}                     /if last is train make train
-e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(x;e f)]}
+e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(m x;e f)]}
 P:{i::0;t s::x 0};GAP:*|.@[;]
-tpi:{((x[0],(';GAP));x[1];P x:("[",0N),'$[`C=@x;w;]x)} /parse tokens or string returning tokens(t) pos(p) indices(i)
+tpi:{((s,(';GAP));x[1];P x:("[",0N),'$[`C=@x;w;]x)}    /parse tokens or string returning tokens(t) pos(p) indices(i)
 tpitop:{@/(*:;*|:)@\:x}                                                                             /just get tokens
 p:tpitop@tpi@
 tpif:{                                                                            /parse file:  `C -> list of parses
