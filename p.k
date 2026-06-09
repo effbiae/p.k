@@ -82,7 +82,7 @@ val:(+{[t;p]$[|/m:fns[0]@\:t;(fns[1;*&m]t;p);(t;p)]}').                         
 upcast:{$[~|/^(@'x)?`f;`f$;]x}
 jnl:{m:{~|/^x?@y}[z]
  (x;y):(&~=':m'x)_/:(x;y);w:&m'*'x;,/'{@[x;z;:;y@x z]}[;;w]'[(x;y);({upcast@$[1<#x;,x;x]}';*:')]}     /join literals
-ajl:{x{jnl . x,,y}/(`f`i;,`s)}
+ajl:{$[x;x{jnl . x,,y}/(`f`i;,`s);(();!0)]}
 
 w:{$[x;ajl val str sem run@x;(();!0)]}                                                               /w is the lexer
 
@@ -97,7 +97,7 @@ g:{$[(~|/(:;::)~\:s@*x)&v@*|x;(#s;{$[2=#x;x,1+#s;*x]}@-1_x;*|x);x]}             
 e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(m x;e f)]}
 P:{i::0;t s::x 0};GAP:*|.@[;]
 tpi:{((s,(';GAP));x[1];P x:("[",0N),'$[`C=@x;w;]x)}    /parse tokens or string returning tokens(t) pos(p) indices(i)
-tpitop:{@/(*:;*|:)@\:x}                                                                             /just get tokens
+tpitop:{$[x;@/(*:;*|:)@\:x;()]}                                                                     /just get tokens
 p:tpitop@tpi@
 tpif:{                                                                            /parse file:  `C -> list of parses
  nls:{+1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x}             /split on newlines
