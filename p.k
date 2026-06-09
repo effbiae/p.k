@@ -96,8 +96,11 @@ v:{("v"~c s x)|("a"~c s@*x)|(*x)~#s}                                            
 g:{$[(~|/(:;::)~\:s@*x)&v@*|x;(#s;{$[2=#x;x,1+#s;*x]}@-1_x;*|x);x]}                     /if last is train make train
 e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(x;e f)]}
 P:{i::0;t s::x 0};GAP:*|.@[;]
-p:{(x[0],(';GAP))P x:("[",0N),'$[`C=@x;w;]x}                                                  /parse tokens or string
-pf:{                                                                              /parse file:  `C -> list of parses
- nls:{+1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x}                                                    /split on newlines
- hsh:{$[(#)~***x;1_;]x}                                                                                          /#!
- {$[`C~@*x;;p]x}'((""~*:)')_hsh nls w x}                                               /system command as ,"\\l p.k"
+tpi:{((x[0],(';GAP));x[1];P x:("[",0N),'$[`C=@x;w;]x)} /parse tokens or string returning tokens(t) pos(p) indices(i)
+tpitop:{@/(*:;*|:)@\:x}                                                                             /just get tokens
+p:tpitop@tpi@
+tpif:{                                                                            /parse file:  `C -> list of parses
+ nls:{+1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x}        /split on newlines
+ hsh:{$[(#)~***x;1_;]x}                                              /#!
+ {$[`C~@*x;;tpi]x}'((""~*:)')_hsh nls w x} /system command as ,"\\l p.k"
+pf:tpitop@'tpif@                                                                  /parse file:  `C -> list of parses
