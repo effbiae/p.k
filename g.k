@@ -45,7 +45,7 @@ switch:{[e;x]
 g:{[e;x]Q[switch[e;x]]}
 h:{"//",`k[x],"\n ",ccl["mre";$[|/^(:;::)?*x;ccl["oue"];]@g[0#`;x]]}
 vtou:(::) /{$[(2=#x)&`v~@*x;(.$[*x],":";o x 1);x~*x;x;o'x]}
-s:vtou'p.pf@
+s:p.pf@
 in:1:$[x;*x;0]
 ss:h's in
 `0:"#include<a.h>
