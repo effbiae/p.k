@@ -100,7 +100,7 @@ tpi:{((x[0],(';GAP));x[1];P x:("[",0N),'$[`C=@x;w;]x)} /parse tokens or string r
 tpitop:{@/(*:;*|:)@\:x}                                                                             /just get tokens
 p:tpitop@tpi@
 tpif:{                                                                            /parse file:  `C -> list of parses
- nls:{+1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x}        /split on newlines
- hsh:{$[(#)~***x;1_;]x}                                              /#!
- {$[`C~@*x;;tpi]x}'((""~*:)')_hsh nls w x} /system command as ,"\\l p.k"
+ nls:{+1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x}             /split on newlines
+ hsh:{$[(#)~***x;1_;]x}                                                   /#!
+ {$[`C~@*x;x,,0;tpi x]}'((""~*:)')_hsh nls w x} /system command as ,"\\l p.k"
 pf:tpitop@'tpif@                                                                  /parse file:  `C -> list of parses
