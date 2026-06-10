@@ -20,7 +20,7 @@ args:{(1+|/xyz??`x,t vars 1_x)#xyz:`x`y`z}
 increfs:{,//{ccl["_R";x],";"}''(#').(.:;$!:)@\:(1>)_-1+#'=t vars x}
 bda:{[a;l;x](,/{"A ",$[x],"=0;"}'l),"\n ",increfs[x],g[a;x]}
 lam:{a:?args x;n:"$$",($fi+:1);fs,:,"Z A ",ccl[n;("A ",$:)'a],ccl["_";bda[a;t locals 1_x;x 1]];(n;a)}  /lambda
-ti:{"({L t=now();F(",$[x],",",ccl["mr";g[0#`]@sg@*tpsif@y],");al((t=now()-t+500)/1000);})"}
+ti:{"({L t=now();F(",$[x],",",ccl["mr";g[0#`]@sg@p.tpsi@y],");al((t=now()-t+500)/1000);})"}
 sys:{$["\\t"~2#x;[x:2_x;$[":"~*x;[x:1_x;Q[i:x?" "];n:`I$i#x;x:i_x];n:1];ti[n;x]]
        "\\m"~2#x;"bsm(0)"
        Q[0]]}
@@ -46,11 +46,9 @@ switch:{[e;i]
 g:{[e;i]Q[switch[e;i]]}
 sg:{(t;p;s;i)::x;i}
 h:{[x]sg x;"//",s,"\n ",ccl["mre";$[|/^(:;::)?t@*i;ccl["oue"];]@g[0#`;i]]}
-tpsif:{p.tpsif[p.w@x;x]}
 in:1:$[x;*x;0]
-ss:h'tpsif in
+ss:h'p.tpsif in
 `0:"#include<a.h>
-Z C*$s=",`k[in],";
 Z U $p;
 #define $2(f,p,x,y)   ({A $y=(y);A $x=$y?(x):0;A _;$x?_=f($x,$y),mr($x),_:$y?mr($y),0:0;})
 #define $3(f,p,x,y,z) ({A $z=(z);A $y=$z?(y):0;A $x=$y?(x):0; A _;\\
