@@ -97,14 +97,14 @@ g:{$[(~|/(:;::)~\:s@*x)&v@*|x;(#s;{$[2=#x;x,1+#s;*x]}@-1_x;*|x);x]}             
 e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(m x;e f)]}
 P:{i::0;t s::x 0};GAP:*|.@[;]
 tpi:{((s,(';GAP));x[1];P x:("[",0N),'x)}                         /parse tokens returning tokens(t) pos(p) indices(i)
-reb:{[p;s]                                   /rebase positions to 0
- end:{[s;p]x+&/((#s)-x)^((x:|/0^p)_s)?";\n"} /find span of s with p up to next ;\n
- n:&/(#s)^p;((n^p)-n;*(n,end[s;p])_s)}
-tpsi:{[t;s]x:tpi t;(,*x),reb[x 1;s],,*|x}
+reb:{[p;s]                                   /rebase positions to 0 with reduced source code string
+ end:{[s;p]x+&/((#s)-x)^((x:|/0^p)_s)?";\n"} /find end of s with p up to next ;\n
+ n:&/(#s)^p;((n^p)-n;*(n,end[s;p])_s)}       /find new positions and trimmed string
+tpsi:{[t;s](,*p),reb[p 1;s],,*|p:tpi t}
 tpsitop:{$[x;@/(*:;*|:)@\:x;()]}                                                                     /just get tokens
-p:{tpsitop@tpsi[;x]@w@x}
+p:{tpsitop@tpsi[w@x;x]}
 tpsif:{[t;s]                                                                       /parse file:  `C -> list of parses
  nls:{+1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x}             /split on newlines
  hsh:{$[(#)~***x;1_;]x}                                                   /#!
- {[t;s]$[`C~@*t;(,*t),reb[t 1;s],,*t;tpsi[t;s]]}[;s]'((""~*:)')_hsh nls t} /system command as ,"\\l p.k"
-pf:{tpsitop@'tpsif[;x]@w@x}                                                        /parse file:  `C -> list of parses
+ tpsi[;s]'((""~*:)')_hsh nls t}
+pf:{tpsitop@'tpsif[w@x;x]}                                                         /parse file:  `C -> list of parses
