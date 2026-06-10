@@ -96,11 +96,15 @@ v:{("v"~c s x)|("a"~c s@*x)|(*x)~#s};m:{$[`v=@s x;s[x]:.$[s x],":";];x}         
 g:{$[(~|/(:;::)~\:s@*x)&v@*|x;(#s;{$[2=#x;x,1+#s;*x]}@-1_x;*|x);x]}                     /if last is train make train
 e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(m x;e f)]}
 P:{i::0;t s::x 0};GAP:*|.@[;]
-tpi:{((s,(';GAP));x[1];P x:("[",0N),'$[`C=@x;w;]x)}    /parse tokens or string returning tokens(t) pos(p) indices(i)
-tpitop:{$[x;@/(*:;*|:)@\:x;()]}                                                                     /just get tokens
-p:tpitop@tpi@
-tpif:{                                                                            /parse file:  `C -> list of parses
+tpi:{((s,(';GAP));x[1];P x:("[",0N),'x)}                         /parse tokens returning tokens(t) pos(p) indices(i)
+reb:{[p;s]                                   /rebase positions to 0
+ end:{[s;p]x+&/((#s)-x)^((x:|/0^p)_s)?";\n"} /find span of s with p up to next ;\n
+ n:&/(#s)^p;((n^p)-n;*(n,end[s;p])_s)}
+tpsi:{[t;s]x:tpi t;(,*x),reb[x 1;s],,*|x}
+tpsitop:{$[x;@/(*:;*|:)@\:x;()]}                                                                     /just get tokens
+p:{tpsitop@tpsi[;x]@w@x}
+tpsif:{[t;s]                                                                       /parse file:  `C -> list of parses
  nls:{+1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x}             /split on newlines
  hsh:{$[(#)~***x;1_;]x}                                                   /#!
- {$[`C~@*x;x,,0;tpi x]}'((""~*:)')_hsh nls w x} /system command as ,"\\l p.k"
-pf:tpitop@'tpif@                                                                  /parse file:  `C -> list of parses
+ {[t;s]$[`C~@*t;(,*t),reb[t 1;s],,*t;tpsi[t;s]]}[;s]'((""~*:)')_hsh nls t} /system command as ,"\\l p.k"
+pf:{tpsitop@'tpsif[;x]@w@x}                                                        /parse file:  `C -> list of parses
