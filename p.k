@@ -49,7 +49,7 @@ __()++a0q`-+a/nt
 +_()++a0q`-:a'n'
 '_()++a0q`-:a'n'
 a_()+bbbq`++b'n'
-0_()++11q`+:e'n'
+0_()+111q`+:e'n'
 qrrrrrrrtrrrrrrs
 `_()++b0q`++b'n'
 -_()++a1q`-:a'n'
@@ -57,7 +57,7 @@ qrrrrrrrtrrrrrrs
 ccccccccccccccnc
 :_()++a0q`-+a'n'
 b_()+bbbq`++b'n'
-1_()++11q`++e'n'
+1_()+111q`++e'n'
 e_()++11q`1+1'n'
 rrrrrrrrtrrrrrrs
 srrrrrrrrrrrrrrr
