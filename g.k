@@ -9,26 +9,27 @@ fs:();fi:0
 str:{x:$[`C~@x;x;$x];$[1=#x;1_;]`k@x}
 par:{"(",x,")"}
 ccl:{x,par@$[~^`C`c?@y;y;","/y]}
-prj:{[e;x]ccl["prj";g[e;*x],",(A[]){",(","/g[e]'1_x),"},",$#1_x]}
-cal:{[e;x]$[|/(x)~\:p.GAP;prj[e]x;$[~^2 3?#x;ccl["_",($-1+#x),"$";(,,"0"),g[e]'x];]]}
+prj:{[e;i]ccl["prj";g[e;*i],",(A[]){",(","/g[e]'1_i),"},",$#1_i]}
+cal:{[e;i]$[|/(t i)~\:p.GAP;prj[e]i;$[~^2 3?#i;ccl["_",($-1+#i),"$";(,,"0"),g[e]'i];]]}
 chs:{$[`c~@a:. x;ccl["ac";$0+a];ccl["aCz";x]]}
-cmp:{[e;x]ccl["com$";g[e]'x]}
-var:{(1=#x)&`S~@x}
-vars:{,//$["{"~*x;();var x;x;x~*x;();o'x]}
-locals:{?,//$["{"~*x;();((:)~*x)&3=#x;x[1],o x 2;x~*x;();o'x]}
-args:{(1+|/xyz??`x,vars 1_x)#xyz:`x`y`z}
-increfs:{,//{ccl["_R";x],";"}''(#').(.:;$!:)@\:(1>)_-1+#'=vars x}
+cmp:{[e;i]ccl["com$";g[e]'i]}
+var:{(1=#x)&`S~@t x}
+vars:{,//$["{"~t@*x;();var x;x;x~*x;();o'x]}
+locals:{?,//$["{"~t@*x;();((:)~t@*x)&3=#x;x[1],o x 2;x~*x;();o'x]}
+args:{(1+|/xyz??`x,t vars 1_x)#xyz:`x`y`z}
+increfs:{,//{ccl["_R";x],";"}''(#').(.:;$!:)@\:(1>)_-1+#'=t vars x}
 bda:{[a;l;x](,/{"A ",$[x],"=0;"}'l),"\n ",increfs[x],g[a;x]}
-lam:{a:?args x;n:"$$",($fi+:1);fs,:,"Z A ",ccl[n;("A ",$:)'a],ccl["_";bda[a;locals 1_x;x 1]];(n;a)}  /lambda
-ti:{"({L t=now();F(",$[x],",",ccl["mr";g[0#`]@*s@y],");al((t=now()-t+500)/1000);})"}
+lam:{a:?args x;n:"$$",($fi+:1);fs,:,"Z A ",ccl[n;("A ",$:)'a],ccl["_";bda[a;t locals 1_x;x 1]];(n;a)}  /lambda
+ti:{"({L t=now();F(",$[x],",",ccl["mr";g[0#`]@sg@*tpsif@y],");al((t=now()-t+500)/1000);})"}
 sys:{$["\\t"~2#x;[x:2_x;$[":"~*x;[x:1_x;Q[i:x?" "];n:`I$i#x;x:i_x];n:1];ti[n;x]]
        "\\m"~2#x;"bsm(0)"
        Q[0]]}
-switch:{[e;x]
+switch:{[e;i]
+             x:t@i
      $[  `w=@x;"aw+",$. x
- (`w=@*x)&2=#x;ccl["ar";(g[e]x 1;$.*x)] /derive the verb
-        (:)~*x;ccl["gls";(str@*x 1;g[e]x 2)]
-        (')~*x;cmp[e]1_x /composition
+ (`w=@*x)&2=#x;ccl["ar";(g[e]i 1;$.*x)] /derive the verb
+        (:)~*x;ccl["gls";(str@*x 1;g[e]i 2)]
+        (')~*x;cmp[e]1_i /composition
          `u=@x;par"au+",$[. x]
          `v=@x;par"av+",$[. x]
          `i=@x;ccl["ai";$x]
@@ -37,16 +38,17 @@ switch:{[e;x]
          `s=@x;ccl["sym";str@$x]
          `S=@x;$[1=#x;$[~^e?*x;$*x;ccl["glg";str@*x]];,/"`",/:$x]
          `C=@x;chs x
-        "{"~*x;[x:lam x;ccl["ax";(x 0;$#x 1)]]
+        "{"~*x;[x:lam i;ccl["ax";(x 0;$#x 1)]]
         `c=@*x;"[("
         `C=@*x;sys@*x
-          1<#x;cal[e;x]
+          1<#x;cal[e;i]
        ]}
-g:{[e;x]Q[switch[e;x]]}
-h:{"//",`k[x],"\n ",ccl["mre";$[|/^(:;::)?*x;ccl["oue"];]@g[0#`;x]]}
-s:p.pf@
+g:{[e;i]Q[switch[e;i]]}
+sg:{(t;p;s;i)::x;i}
+h:{[x]sg x;"//",s,"\n ",ccl["mre";$[|/^(:;::)?t@*i;ccl["oue"];]@g[0#`;i]]}
+tpsif:{p.tpsif[p.w@x;x]}
 in:1:$[x;*x;0]
-ss:h's in
+ss:h'tpsif in
 `0:"#include<a.h>
 Z C*$s=",`k[in],";
 Z U $p;
