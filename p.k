@@ -96,16 +96,17 @@ v:{("v"~c s x)|("a"~c s@*x)|(*x)~#s};m:{$[`v=@s x;s[x]:.$[s x],":";];x}         
 g:{$[(~|/(:;::)~\:s@*x)&v@*|x;(#s;{$[2=#x;x,1+#s;*x]}@-1_x;*|x);x]}                     /if last is train make train
 e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(m x;e f)]}
 P:{i::0;t s::x 0};GAP:*|.@[;]
-tpi:{((s,(';GAP));x[1];P x:("[",0N),'x)}                         /parse tokens returning tokens(t) pos(p) indices(i)
+itp:{|(x[1];(s,(';GAP));P x:("[",0N),'x)}                 /parse tokens returning int tree, tokens and src positions
+itps:{itp[w@x],,x}
+itpstop:{$[x;x[1]@*x;()]}                                                                            /just get tokens
+p:itpstop@itps@
+
 rebase:{[p;s]                                /rebase positions to 0 and reduce source code string
- end:{[s;p]x+&/((#s)-x)^((x:|/0^p)_s)?";\n"} /find end of s with p up to next ;\n
- n:&/(#s)^p;((n^p)-n;*(n,end[s;p])_s)}       /find new positions and trimmed string
-tpsits:{[t;s](,*p),rebase[p 1;s],,*|p:tpi t}
-tpsi:{tpsits[w@x;x]}
-tpsitop:{$[x;@/(*:;*|:)@\:x;()]}                                                                     /just get tokens
-p:tpsitop@tpsi@
-tpsif:{                                                                  /parse file:  `C -> (t;p;s;i) list of parses
+ end:{[p;s]x+&/((#s)-x)^((x:|/0^p)_s)?";\n"} /find end of s with p up to next ;\n
+ n:&/(#s)^p;((n^p)-n;*(n,end[p;s])_s)}       /find new positions and trimmed string
+itpsts:{[t;s]p:itp t;(2#p),rebase[p 2;s]}
+itpsf:{                                                                  /parse file:  `C -> (t;p;s;i) list of parses
  nls:{+1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x}             /split on newlines
  hsh:{$[(#)~***x;1_;]x}                                                   /#!
- tpsits[;x]'((""~*:)')_hsh nls w x}
-pf:tpsitop@'tpsif@                                                                 /parse file:  `C -> list of parses
+ itpsts[;x]'((""~*:)')_hsh nls w x}
+pf:itpstop@'itpsf@                                                                 /parse file:  `C -> list of parses
