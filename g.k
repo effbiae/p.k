@@ -60,5 +60,5 @@ Z A gls(S s,A x)_(A*p=gp(sym(s));I(p&&*p,mr(*p));*p=xR) //global set
 Z A glg(S s)_(gg(sym(s)))                               //global get
 Z A1(oue,x?out(x):0)
 #define mre(x) ({A $x=(x);if(!$x)return 0;mr($x);})
-Z S $s;Z I errp(I i)_((K2(\"{(2)1:x,0x0a,(y#0x20),0x5e0a}\",aCz($s),ai(i)));0)"
+Z S $s;Z I errp(I i)_(mre(K2(\"{(2)0:(x;(y#0x20),0x5e)}\",aCz($s),ai(i)));0)"
 `0:fs;`0:"A1(m,";`0:{" ",x,";"}'ss;`0:,"au)"
