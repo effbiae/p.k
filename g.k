@@ -10,7 +10,7 @@ str:{x:$[`C~@x;x;$x];$[1=#x;1_;]`k@x}
 par:{"(",x,")"}
 ccl:{x,par@$[~^`C`c?@y;y;","/y]}
 prj:{[e;i]ccl["prj";g[e;*i],",(A[]){",(","/g[e]'1_i),"},",$#1_i]}
-cal:{[e;i]$[|/(t i)~\:p.GAP;prj[e]i;$[~^2 3?#i;ccl["_",($-1+#i),"$";($[0;,"0";$p[*:/i]]),g[e]'i];]]}
+cal:{[e;i]$[|/(t i)~\:p.GAP;prj[e]i;$[~^2 3?#i;ccl["_",($-1+#i),"$";(,$[p@*:/i]),g[e]'i];]]}
 chs:{$[`c~@a:. x;ccl["ac";$0+a];ccl["aCz";x]]}
 cmp:{[e;i]ccl["com$";g[e]'i]}
 var:{(1=#x)&`S~@t x}
