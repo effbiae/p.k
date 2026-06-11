@@ -49,13 +49,13 @@ h:{[x]sg x;"/*",s,"*/$s=",`k[s],";\n ",ccl["mre";$[|/^(:;::)?t@*i;ccl["oue"];]@g
 in:1:$[x;*x;0]
 ss:h'p.itpsf in
 `0:"#include<a.h>
-#define $2(f,p,x,y)   ({A $y=(y);A $x=$y?(x):0;A _;$x?_=f($x,$y),mr($x),_:$y?mr($y),0:0;})
+#define $2(f,p,x,y)   ({A $y=(y);A $x=$y?(x):0;A _;$x?_=f($x,$y),mr($x),(_?:0/*errp(p)*/):$y?mr($y),0:0;})
 #define $3(f,p,x,y,z) ({A $z=(z);A $y=$z?(y):0;A $x=$y?(x):0; A _;\\
-                                              $x?(_=f($x,$y,$z),mr($x),(_?:errp(p))):\\
+                                              $x?_=f($x,$y,$z),mr($x),(_?:errp(p)):\\
                                                 $y?mr($y),mr($z),0:$z?mr($z),0:0;})
 #define _1$(p,x,y)    $2(_1,p,x,y)
 #define _2$(p,x,y,z)  $3(_2,p,x,y,z)
-#define com$(x,y)   $2(com,p,x,y)
+#define com$(x,y)   $2(com,0,x,y)
 Z A gls(S s,A x)_(A*p=gp(sym(s));I(p&&*p,mr(*p));*p=xR) //global set
 Z A glg(S s)_(gg(sym(s)))                               //global get
 Z A1(oue,x?out(x):0)

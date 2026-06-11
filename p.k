@@ -97,15 +97,16 @@ g:{$[(~|/(:;::)~\:s@*x)&v@*|x;(#s;{$[2=#x;x,1+#s;*x]}@-1_x;*|x);x]}             
 e:{v:{";"<c s i-1};$[q`;x;v[f:t`]>v`;g(f;x;e t`);g(m x;e f)]}
 P:{i::0;t s::x 0};GAP:*|.@[;]
 itp:{|(x[1];(s,(';GAP));P x:("[",0N),'x)}                 /parse tokens returning int tree, tokens and src positions
-itps:{itp[w@x],,x}
-itpstop:{$[x;x[1]@*x;()]}                                                                            /just get tokens
+itps:{itp[w@x],,x}                                                                               /itp, and add source
+itpstop:{$[x;x[1]@*x;()]}                                                                        /just get token tree
 p:itpstop@itps@
 
+/for parsing a file (for a string including newlines)
 rebase:{[p;s]                                /rebase positions to 0 and reduce source code string
  end:{[p;s]x+&/((#s)-x)^((x:|/0^p)_s)?";\n"} /find end of s with p up to next ;\n
  n:&/(#s)^p;((n^p)-n;*(n,end[p;s])_s)}       /find new positions and trimmed string
 itpsts:{[t;s]p:itp t;(2#p),rebase[p 2;s]}
-itpsf:{                                                                  /parse file:  `C -> (t;p;s;i) list of parses
+itpsf:{                                                                  /parse file:  `C -> (i;t;s;p) list of parses
  nls:{+1_'/:(&("\n"~)'t)_/:(t;p):("\n";0N),'x}             /split on newlines
  hsh:{$[(#)~***x;1_;]x}                                                   /#!
  itpsts[;x]'((""~*:)')_hsh nls w x}
