@@ -10,7 +10,8 @@ str:{x:$[`C~@x;x;$x];$[1=#x;1_;]`k@x}
 par:{"(",x,")"}
 ccl:{x,par@$[~^`C`c?@y;y;","/y]}
 prj:{[e;i]ccl["prj";g[e;*i],",(A[]){",(","/g[e]'1_i),"},",$#1_i]}
-cal:{[e;i]$[|/(t i)~\:p.GAP;prj[e]i;$[~^2 3?#i;ccl["_",($-1+#i),"$";(,$p@*:/i),g[e]'i];]]}
+pos:{[i]p@f@*&~^p@f:,//i}
+cal:{[e;i]$[|/(t i)~\:p.GAP;prj[e]i;$[~^2 3?#i;ccl["_",($-1+#i),"$";(,$pos i),g[e]'i];]]}
 chs:{$[`c~@a:. x;ccl["ac";$0+a];ccl["aCz";x]]}
 cmp:{[e;i]ccl["com$";g[e]'i]}
 var:{(1=#x)&`S~@t x}
@@ -49,7 +50,7 @@ h:{[x]sg x;"/*",s,"*/$s=",`k[s],";\n ",ccl["mre";$[|/^(:;::)?t@*i;ccl["oue"];]@g
 in:1:$[x;*x;0]
 ss:h'p.itpsf in
 `0:"#include<a.h>
-#define $2(f,p,x,y)   ({A $y=(y);A $x=$y?(x):0;A _;$x?_=f($x,$y),mr($x),(_?:0/*errp(p)*/):$y?mr($y),0:0;})
+#define $2(f,p,x,y)   ({A $y=(y);A $x=$y?(x):0;A _;$x?_=f($x,$y),mr($x),(_?:errp(p)):$y?mr($y),0:0;})
 #define $3(f,p,x,y,z) ({A $z=(z);A $y=$z?(y):0;A $x=$y?(x):0; A _;\\
                                               $x?_=f($x,$y,$z),mr($x),(_?:errp(p)):\\
                                                 $y?mr($y),mr($z),0:$z?mr($z),0:0;})
