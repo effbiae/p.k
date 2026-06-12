@@ -16,11 +16,11 @@ chs:{$[`c~@a:. x;ccl["ac";$0+a];ccl["aCz";x]]}
 cmp:{[e;i]ccl["com$";g[e]'i]}
 var:{(1=#x)&`S~@t x}
 vars:{,//$["{"~t@*x;();var x;x;x~*x;();o'x]}
-locals:{?,//$["{"~t@*x;();((:)~t@*x)&3=#x;x[1],o x 2;x~*x;();o'x]}
+locals:{,//$["{"~t@*x;();((:)~t@*x)&3=#x;x[1],o x 2;x~*x;();o'x]}
 args:{(1+|/xyz??`x,t vars 1_x)#xyz:`x`y`z}
 increfs:{,//{ccl["_R";x],";"}''(#').(.:;$!:)@\:(1>)_-1+#'=t vars x}
-bda:{[a;l;x](,/{"A ",$[x],"=0;"}'l),"\n ",increfs[x],g[a;x]}
-lam:{a:?args x;n:"$$",($fi+:1);fs,:,"Z A ",ccl[n;("A ",$:)'a],ccl["_";bda[a;t locals 1_x;x 1]];(n;a)}  /lambda
+bda:{[a;l;x](,//{"A ",$[x],"=0;"}'l),"\n ",increfs[x],g[a,l;x]}
+lam:{a:?args x;n:"$$",($fi+:1);fs,:,"Z A ",ccl[n;("A ",$:)'a],ccl["_";bda[a;?*'t@locals 1_x;x 1]];(n;a)}  /lambda
 ti:{"({L t=now();F(",$[x],",",ccl["mr";g[0#`]@sg@p.itps@y],");al((t=now()-t+500)/1000);})"}
 sys:{$["\\t"~2#x;[x:2_x;$[":"~*x;[x:1_x;Q[i:x?" "];n:`I$i#x;x:i_x];n:1];ti[n;x]]
        "\\m"~2#x;"bsm(0)"
@@ -29,7 +29,7 @@ switch:{[e;i]
              x:t@i
      $[  `w=@x;"aw+",$. x
  (`w=@*x)&2=#x;ccl["ar";(g[e]i 1;$.*x)] /derive the verb
-        (:)~*x;ccl["gls";(str@*x 1;g[e]i 2)]
+        (:)~*x;$[~^e?s:*x 1;$[s],"=",g[e]i 2;ccl["gls";(str@s;g[e]i 2)]]
         (')~*x;cmp[e]1_i /composition
          `u=@x;par"au+",$[. x]
          `v=@x;par"av+",$[. x]
